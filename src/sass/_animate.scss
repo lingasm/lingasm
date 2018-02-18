@@ -1,0 +1,15 @@
+.slick-active .rotateIn {  
+  transform: rotate(0deg) scale(1);
+  opacity: 1;
+  transition: all 2s;
+}
+
+.reset-animation .slide-item__text {
+  transform: rotate(-360deg) scale(0);
+  transition: all 0s;
+}
+
+.slick-active .zoomIn {
+  opacity: 1;
+  transform: scale(1);
+}

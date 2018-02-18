@@ -1,0 +1,226 @@
+$icons: (0:0)
+$icons: map-merge($icons,('accordion-ch': (X: -80px, Y:-247px, W: 16px, H: 8px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('basket': (X: 0px, Y:-197px, W: 42px, H: 40px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('cartMinus': (X: -97px, Y:-275px, W: 5px, H: 9px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('cartPlus': (X: -82px, Y:-275px, W: 5px, H: 9px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('certificate': (X: 0px, Y:-247px, W: 20px, H: 18px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('delivery': (X: -207px, Y:-197px, W: 25px, H: 16px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('facebook': (X: -27px, Y:-275px, W: 10px, H: 19px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('facebook@2x': (X: -313px, Y:-137px, W: 20px, H: 38px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('filterbtn': (X: -103px, Y:-197px, W: 28px, H: 28px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('gAdd': (X: -52px, Y:-197px, W: 41px, H: 40px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('gMinus': (X: -103px, Y:-235px, W: 10px, H: 2px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('gPlus': (X: -47px, Y:-275px, W: 10px, H: 10px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('galleryhover': (X: -209px, Y:0px, W: 127px, H: 127px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('gallerysale': (X: 0px, Y:0px, W: 199px, H: 187px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('nextpag': (X: 0px, Y:-304px, W: 11px, H: 23px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('prevpag': (X: -21px, Y:-304px, W: 11px, H: 23px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('return': (X: -30px, Y:-247px, W: 16px, H: 16px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('search': (X: -56px, Y:-247px, W: 14px, H: 14px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('select': (X: -67px, Y:-275px, W: 5px, H: 10px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('shop': (X: 0px, Y:-275px, W: 17px, H: 19px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('slickNext': (X: -286px, Y:-197px, W: 34px, H: 8px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('slickPrev': (X: -242px, Y:-197px, W: 34px, H: 8px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('sorting-dropdown': (X: -106px, Y:-247px, W: 10px, H: 5px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('stargrey': (X: -141px, Y:-197px, W: 23px, H: 20px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('starpink': (X: -174px, Y:-197px, W: 23px, H: 20px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('topBtn': (X: -209px, Y:-137px, W: 42px, H: 45px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+$icons: map-merge($icons,('top_Btn_hover': (X: -261px, Y:-137px, W: 42px, H: 45px, TW: 336px, TH: 327px, IMG: '../img/sprite.png')))
+
+
+// Gets an attribute from the sass map
+@function icon-attr($icon, $attr)
+  $icon: map-get($icons, $icon)
+  @return map-get($icon, $attr)
+
+@mixin sprite($iconName)
+  background-image: url(icon-attr($iconName, IMG))
+  width: icon-attr($iconName, W)
+  height: icon-attr($iconName, H)
+  background-position: icon-attr($iconName, X) icon-attr($iconName, Y)
+@mixin sprite-position($iconName)
+  background-position: icon-attr($iconName, X) icon-attr($iconName, Y)
+@mixin sprite-retina($iconName)
+  background-image: url(icon-attr($iconName, IMG))
+  $width: icon-attr($iconName, W)
+  $height: icon-attr($iconName, H)
+  width: $width/2
+  height: $height/2
+  $x: icon-attr($iconName, X)
+  $y: icon-attr($iconName, Y)
+  background-position: $x/2 $y/2
+  $tw: icon-attr($iconName, TW)   
+  $th: icon-attr($iconName, TH)
+  background-size: $tw/2 $th/2    
+
+
+@mixin s($i)
+  +sprite($i)
+@mixin sp($i)
+  +sprite-position($i)
+@mixin sr($i)
+  +sprite-retina($i)  
+
+//
+//.icon-accordion-ch
+//  width: 16px
+//  height: 8px
+//  background-image: url('../img/sprite.png')
+//  background-position: -80px -247px
+//
+//.icon-basket
+//  width: 42px
+//  height: 40px
+//  background-image: url('../img/sprite.png')
+//  background-position: 0px -197px
+//
+//.icon-cartMinus
+//  width: 5px
+//  height: 9px
+//  background-image: url('../img/sprite.png')
+//  background-position: -97px -275px
+//
+//.icon-cartPlus
+//  width: 5px
+//  height: 9px
+//  background-image: url('../img/sprite.png')
+//  background-position: -82px -275px
+//
+//.icon-certificate
+//  width: 20px
+//  height: 18px
+//  background-image: url('../img/sprite.png')
+//  background-position: 0px -247px
+//
+//.icon-delivery
+//  width: 25px
+//  height: 16px
+//  background-image: url('../img/sprite.png')
+//  background-position: -207px -197px
+//
+//.icon-facebook
+//  width: 10px
+//  height: 19px
+//  background-image: url('../img/sprite.png')
+//  background-position: -27px -275px
+//
+//.icon-facebook@2x
+//  width: 20px
+//  height: 38px
+//  background-image: url('../img/sprite.png')
+//  background-position: -313px -137px
+//
+//.icon-filterbtn
+//  width: 28px
+//  height: 28px
+//  background-image: url('../img/sprite.png')
+//  background-position: -103px -197px
+//
+//.icon-gAdd
+//  width: 41px
+//  height: 40px
+//  background-image: url('../img/sprite.png')
+//  background-position: -52px -197px
+//
+//.icon-gMinus
+//  width: 10px
+//  height: 2px
+//  background-image: url('../img/sprite.png')
+//  background-position: -103px -235px
+//
+//.icon-gPlus
+//  width: 10px
+//  height: 10px
+//  background-image: url('../img/sprite.png')
+//  background-position: -47px -275px
+//
+//.icon-galleryhover
+//  width: 127px
+//  height: 127px
+//  background-image: url('../img/sprite.png')
+//  background-position: -209px 0px
+//
+//.icon-gallerysale
+//  width: 199px
+//  height: 187px
+//  background-image: url('../img/sprite.png')
+//  background-position: 0px 0px
+//
+//.icon-nextpag
+//  width: 11px
+//  height: 23px
+//  background-image: url('../img/sprite.png')
+//  background-position: 0px -304px
+//
+//.icon-prevpag
+//  width: 11px
+//  height: 23px
+//  background-image: url('../img/sprite.png')
+//  background-position: -21px -304px
+//
+//.icon-return
+//  width: 16px
+//  height: 16px
+//  background-image: url('../img/sprite.png')
+//  background-position: -30px -247px
+//
+//.icon-search
+//  width: 14px
+//  height: 14px
+//  background-image: url('../img/sprite.png')
+//  background-position: -56px -247px
+//
+//.icon-select
+//  width: 5px
+//  height: 10px
+//  background-image: url('../img/sprite.png')
+//  background-position: -67px -275px
+//
+//.icon-shop
+//  width: 17px
+//  height: 19px
+//  background-image: url('../img/sprite.png')
+//  background-position: 0px -275px
+//
+//.icon-slickNext
+//  width: 34px
+//  height: 8px
+//  background-image: url('../img/sprite.png')
+//  background-position: -286px -197px
+//
+//.icon-slickPrev
+//  width: 34px
+//  height: 8px
+//  background-image: url('../img/sprite.png')
+//  background-position: -242px -197px
+//
+//.icon-sorting-dropdown
+//  width: 10px
+//  height: 5px
+//  background-image: url('../img/sprite.png')
+//  background-position: -106px -247px
+//
+//.icon-stargrey
+//  width: 23px
+//  height: 20px
+//  background-image: url('../img/sprite.png')
+//  background-position: -141px -197px
+//
+//.icon-starpink
+//  width: 23px
+//  height: 20px
+//  background-image: url('../img/sprite.png')
+//  background-position: -174px -197px
+//
+//.icon-topBtn
+//  width: 42px
+//  height: 45px
+//  background-image: url('../img/sprite.png')
+//  background-position: -209px -137px
+//
+//.icon-top_Btn_hover
+//  width: 42px
+//  height: 45px
+//  background-image: url('../img/sprite.png')
+//  background-position: -261px -137px
+//
