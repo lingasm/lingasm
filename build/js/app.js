@@ -2761,8 +2761,10 @@ $(document).ready(function () {
     f(window).scroll(function () {
       if ($(this).scrollTop() >= sectionSlide) {
         $('.header__nav').addClass('fixed');
+        $('.header__nav.fixed').find('.logo').fadeIn();
       } else {
         $('.header__nav').removeClass('fixed');
+        $('.header__nav').find('.logo').fadeOut();
       }
       // element['toggleclass'+ (f(this).scrollTop() > 200 ? 'a': 's')](500); 
     });
@@ -2775,6 +2777,12 @@ $(document).ready(function () {
       scrollTop: $($(this).data('href')).offset().top
     }, 1000);
     return false;
+  }
+
+  // $('.header__nav.fixed').find('.logo').fadeIn()
+  if ($('.header__nav').hasClass('fixed')) {
+    $(this).find('.logo').fadeIn();
+    console.log('dsds');
   }
 
   /*  Slider  */

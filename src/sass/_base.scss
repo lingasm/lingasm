@@ -21,6 +21,76 @@ img {
   text-align: center;
 }
 
+.h2 {
+  position: relative;
+  display: inline-block;
+  font-family: 'Raleway', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #1ab798;
+  &:before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 1px;
+    background: #babdc1;
+    left: -72px;
+    top: 50%;
+    transform: translateY(-50%);
+  }  
+  &:after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 1px;
+    background: #babdc1;
+    right: -72px;
+    top: 50%;
+    transform: translateY(-50%);
+  }  
+}
+
+.s-line {
+  // position: relative
+  font-size: 0;
+  width: 170px;
+  margin: 0 auto;
+  margin-top: 8px;
+  span {
+    position: relative;
+    display: inline-block;
+    width: 78px;
+    height: 2px;
+    background: #343c3f;
+  }  
+  &__left {
+    margin-right: 2px;
+    &:after {
+      content: '';
+      position: absolute;
+      width: 11px;
+      height: 2px;
+      transform: rotate(122deg);
+      background: #343c3f;
+      right: -7px;
+      top: -4px;
+    }  
+  }
+  &__right {
+    margin-left: 2px;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 11px;
+      height: 2px;
+      transform: rotate(122deg);
+      background: #343c3f;
+      left: -7px;
+      top: 4px;
+    }  
+  }    
+}
+
 .btn {
   font-size: 16px;
   color: #fff;
