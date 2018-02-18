@@ -1,55 +1,89 @@
-.input {
-	position: relative;
-	z-index: 1;
-	display: inline-block;
-	margin: 1em;
-	max-width: 350px;
-	width: calc(100% - 2em);
-	vertical-align: top;
-}
-
-.input__field {
-	position: relative;
-	display: block;
-	float: right;
-	padding: 0.8em;
-	width: 60%;
-	border: none;
-	border-radius: 0;
-	background: #f0f0f0;
-	color: #aaa;
-	font-weight: bold;
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	-webkit-appearance: none; /* for box shadows to show on iOS */
-}
-
-.input__field:focus {
-	outline: none;
-}
-
-.input__label {
-	display: inline-block;
-	float: right;
-	padding: 0 1em;
-	width: 40%;
-	color: #6a7989;
-	font-weight: bold;
-	font-size: 70.25%;
-	-webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
-.input__label-content {
-	position: relative;
-	display: block;
-	padding: 1.6em 0;
-	width: 100%;
+.order-form{
+	max-width: 800px;
+	margin: 0 auto;
+	&__inner {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 35px;
+	}
+	&__field {
+		position: relative;
+		z-index: 1;
+		display: inline-block;
+		width: 350px;
+		vertical-align: top;
+		&-big {
+			width: 100%;
+		}
+	}
+	&__btn {
+		text-align: center;
+	}
+	&__textarea {
+		font-size: 14px;
+		height: 200px;
+		width: 100%;
+		color: #5198fc;
+		padding: 10px;
+		border: 1px solid #5198fc;
+		resize: none;
+		&::placeholder {
+			color: #5198fc;
+		}
+	}
+	&__input {
+		position: relative;
+		display: block;
+		float: right;
+		padding: 0.8em;
+		border: none;
+		border-radius: 0;
+		background: #f0f0f0;
+		color: #aaa;
+		width: 100%;
+		background: transparent;
+		color: #5198FC;
+		font-weight: bold;
+		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+		-webkit-appearance: none; /* for box shadows to show on iOS */
+		&:focus + .order-form__label .graphic--madoka {
+			stroke-dashoffset: 0;
+		}
+		&:focus + .order-form__label .order-form__label-content {
+			transform: scale3d(0.81, 0.81, 1) translate3d(0, -40px, 0);
+		}
+		&:focus + .order-form__label {
+			cursor: default;
+			pointer-events: none;
+		}
+	}
+	&__label {
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		padding: 0 10px;
+		color: #6a7989;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		color: #5198FC;
+		cursor: text;
+		-webkit-font-smoothing: antialiased;
+	    -moz-osx-font-smoothing: grayscale;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+		&-content {
+			position: relative;
+			display: block;
+			width: 100%;
+			transform-origin: 0% 50%;
+			transition: transform 0.3s;
+		}
+	}
 }
 
 .graphic {
@@ -59,64 +93,26 @@
 	fill: none;
 }
 
-.icon {
-	color: #ddd;
-	font-size: 150%;
-}
-
-/* Madoka */
-.input--madoka {
-	margin: 1.1em;
-}
-
-.input__field--madoka {
-	width: 100%;
-	background: transparent;
-	color: #5198FC;
-}
-
-.input__label--madoka {
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	color: #5198FC;
-	text-align: left;
-	cursor: text;
-}
-
-.input__label-content--madoka {
-	-webkit-transform-origin: 0% 50%;
-	transform-origin: 0% 50%;
-	-webkit-transition: -webkit-transform 0.3s;
-	transition: transform 0.3s;
-}
-
 .graphic--madoka {
-	-webkit-transform: scale3d(1, -1, 1);
 	transform: scale3d(1, -1, 1);
-	-webkit-transition: stroke-dashoffset 0.3s;
 	transition: stroke-dashoffset 0.3s;
 	pointer-events: none;
-
 	stroke: #5198FC;
 	stroke-width: 4px;
 	stroke-dasharray: 962;
 	stroke-dashoffset: 558;
 }
 
-.input__field--madoka:focus + .input__label--madoka,
 .input--filled .input__label--madoka {
 	cursor: default;
 	pointer-events: none;
 }
 
-.input__field--madoka:focus + .input__label--madoka .graphic--madoka,
+
 .input--filled .graphic--madoka {
 	stroke-dashoffset: 0;
 }
 
-.input__field--madoka:focus + .input__label--madoka .input__label-content--madoka,
-.input--filled .input__label-content--madoka {
-	-webkit-transform: scale3d(0.81, 0.81, 1) translate3d(0, 4em, 0);
-	transform: scale3d(0.81, 0.81, 1) translate3d(0, 4em, 0);
+.input--filled .order-form__label-content {
+	transform: scale3d(0.81, 0.81, 1) translate3d(0, -40px, 0);
 }

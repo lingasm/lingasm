@@ -6,7 +6,6 @@
   background-attachment: fixed;
   &__nav {
     position: relative;
-    padding: 10px 0;
     background-color: #fff;
     box-shadow: 0 2px 20px 5px #f1f1f1;
     &.fixed {
@@ -33,7 +32,8 @@
   align-items: center;
   justify-content: center;
   &__item {
-    margin: 0 10px;
+    margin: 0 20px;
+    padding: 10px 0;
   }
   &__link {
     position: relative;
