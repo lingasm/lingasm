@@ -2791,7 +2791,7 @@ $(document).ready(function () {
     $('.js-slider').slick({
       dots: false,
       arrows: false,
-      autoplay: true,
+      autoplay: false,
       speed: 1500,
       cssEase: 'ease',
       autoplaySpeed: 4500,
