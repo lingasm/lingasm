@@ -1,4 +1,4 @@
-.servises {
+.courses {
   position: relative;
   background: #f8f8f8;
   background-image: url(../img/bg-1.jpg);
@@ -10,35 +10,46 @@
     background-color: rgba(255,255,255,.75);
   }
   &__descr {
-    max-width: 1100px;
+    max-width: 900px;
     margin: 0 auto;
   }
 }
 
-.servises-item {
+.courses-item {
   display: flex;
   margin-bottom: 50px;
+  &__inner {
+    display: flex;
+  }
   &__img {
     flex: 0 0 240px;
-    margin: 0 40px 0 0;
     img {
 
     }
   }
+  &__icon {
+    flex: 0 0 32px;
+  }
   &__title {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 15px;
     font-weight: bold;
   }
+  &__subtitle {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
   &__descr {
-
+    flex: 0 0 calc(100% - 240px);
+    padding-left: 40px;
   }
   &__text {
     font-size: 16px;
+    padding-top: 6px;
   }
   &_right {
-    .servises-item__img {
-      margin: 0 0 0 40px;
+    .courses-item__descr {
+      padding: 0 0 0 40px;
     }
   }
 }

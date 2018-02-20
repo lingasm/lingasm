@@ -1,15 +1,18 @@
 .hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
   padding-top: 150px;
   &__content {
     display: flex;
   }
   &__left {
-    flex: 1 0 60%;
+    width: 60%;
   }
   &__right {
     display: flex;
     justify-content: center;
-    flex: 1 1 40%;
+    width: 40%;
   }
   &__descr {
 
