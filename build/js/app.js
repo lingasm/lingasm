@@ -3,6 +3,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 // example of simple includes for js
 
 /*! jQuery v3.0.0 | (c) jQuery Foundation | jquery.org/license */
+
 !function (a, b) {
   "use strict";
   "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) && "object" == _typeof(module.exports) ? module.exports = a.document ? b(a, !0) : function (a) {
@@ -957,6 +958,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         S(a, b, h, c[h], !0, f, g);
       }
     } else if (void 0 !== d && (e = !0, r.isFunction(d) || (g = !0), j && (g ? (b.call(a, d), b = null) : (j = b, b = function b(a, _b, c) {
+
       return j.call(r(a), c);
     })), b)) for (; i > h; h++) {
       b(a[h], c, g ? d : d.call(a[h], h, b(a[h], c)));
