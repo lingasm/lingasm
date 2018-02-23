@@ -3,8 +3,7 @@
 //=include lib/jquery.min.js
 //=include lib/slick.min.js
 //=include lib/classie.js
-//=include lib/fm.revealator.jquery.min.js
-
+//=include lib/fm.revealator.jquery.js
 
 
 $(document).ready(function () {
@@ -66,10 +65,10 @@ $(document).ready(function () {
 
 /*  end Slider  */
 
-/* Animate scss */
-  
-
-/* End animate scss */
+/* active menu */
+ 
+ 
+/* End active menu */
 
   (function() {
     // trim polyfill : https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/Trim

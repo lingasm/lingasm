@@ -151,6 +151,15 @@ img {
   }
 }
 
+.s-price {
+  &__text {
+
+  }
+  &__span {
+    font-weight: bold;
+  }
+}
+
 .m-0 {
   margin: 0;
 }
