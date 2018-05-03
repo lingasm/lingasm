@@ -2790,8 +2790,8 @@ $(function () {
   Revealator = $.extend({}, {
     timer: null,
     busy: false,
-    scroll_padding: -100,
-    effects_padding: -100,
+    scroll_padding: 0,
+    effects_padding: 0,
     refresh: function refresh() {}
   }, typeof Revealator !== 'undefined' ? Revealator : {});
 
@@ -2896,15 +2896,6 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on('click', '.anchorJS', scrollNav);
-
-  function scrollNav() {
-    $('html, body').animate({
-      scrollTop: $($(this).data('href')).offset().top
-    }, 1000);
-    return false;
-  }
-
   // $('.header__nav.fixed').find('.logo').fadeIn()
   if ($('.header__nav').hasClass('fixed')) {
     $(this).find('.logo').fadeIn();
@@ -2939,6 +2930,46 @@ $(document).ready(function () {
   /*  end Slider  */
 
   /* active menu */
+
+  $(document).on('click', '.anchorJS', scrollNav);
+
+  function scrollNav() {
+    $('html, body').animate({
+      scrollTop: $($(this).data('href')).offset().top - 40
+    }, 1000);
+    return false;
+  }
+
+  var menu_selector = ".main-nav";
+  function onScroll() {
+    var scroll_top = $(document).scrollTop();
+    $(menu_selector + " a").each(function () {
+      var hash = $(this).attr("href");
+      var target = $(hash);
+      if (target.position().top - 80 <= scroll_top && target.position().top + target.outerHeight() > scroll_top) {
+        $(menu_selector + " a.active").removeClass("active");
+        $(this).addClass("active");
+      } else {
+        $(this).removeClass("active");
+      }
+    });
+  }
+
+  $(document).on("scroll", onScroll);
+  $("a[href^=#]").click(function (e) {
+    e.preventDefault();
+    $(document).off("scroll");
+    $(menu_selector + " a.active").removeClass("active");
+    $(this).addClass("active");
+    var hash = $(this).attr("href");
+    var target = $(hash);
+    $("html, body").animate({
+      scrollTop: target.offset().top
+    }, 500, function () {
+      window.location.hash = hash;
+      $(document).on("scroll", onScroll);
+    });
+  });
 
   /* End active menu */
 
