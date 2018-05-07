@@ -1,16 +1,71 @@
 .about {
   position: relative;
+  padding-top: 60px;
   &__content {
+    display: flex;
     padding: 80px 0;
   }
+  &__title {
+    font-family: "HelveticaNeueRegular";
+    position: relative;
+    font-size: 35px;
+    text-transform: uppercase;
+    line-height: 1.1;
+    z-index: 10;
+  }
+  &__left {
+    position: relative;
+    width: 35%;
+    .stars-grid {
+      bottom: -330px;
+      right: 0;
+      z-index: 1;
+    }
+    .circle {
+      position: absolute;
+    }
+    .circle1 {
+      top: 8%;
+      left: 39%;
+    }
+    .circle2 {
+      top: 14%;
+      left: 58%;
+    }
+    .circle3 {
+      top: 29%;
+      left: 25%;
+    }
+    .circle4 {
+      top: 49%;
+      left: 69%;
+    }
+    .circle5 {
+      top: 71%;
+      left: 46%;
+    }
+    .circle6 {
+      top: 83%;
+      left: 15%;
+    }
+  }
+  &__right {
+    width: 65%;
+  }
   &__descr {
+    position: relative;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 60px;
+    box-shadow: 4px 4px 40px rgba(0,0,0,.3);
+    .stars-grid {
+      top: -380px;
+      right: -150px;
+    }
   }
   &__block {
     flex: 0 0 30%;
-    margin: 35px 0;
+    margin: 0 0 35px 0;
   }
 }
 
@@ -34,6 +89,6 @@
   
   &__text {
     font-size: 14px;
-    max-width: 300px;
+    max-width: 340px;
   }
 }

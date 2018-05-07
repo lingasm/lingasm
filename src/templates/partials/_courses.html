@@ -1,136 +1,152 @@
 {% import 'data/data.html' as data %}
 
 <div class="courses" id="courses">
-  <div class="wrapper">
-    <div class="courses__content">
-      <div class="title">
-        <h2 class="h2 h2_section">Курсы</h2>
-        <div class="s-line">
-          <span class="s-line__left"></span>
-          <span class="s-line__right"></span>
+  <div class="courses__content">
+    <div class="title">
+      <h2 class="h2 h2_section">Курсы</h2>
+      <div class="s-line">
+        <span class="s-line__left"></span>
+        <span class="s-line__right"></span>
+      </div>
+    </div>
+    <div class="courses__descr">
+      <div class="courses__section bg-img">
+        <div class="courses__block">
+          <div class="wrapper small">
+            <div class="courses-item revealator-slideright revealator-once revealator-below">
+              <div class="courses-item__img">
+                <img src="img/cources/cources-img1.jpg" alt="">
+              </div>  
+              <div class="courses-item__descr">
+                <div class="courses-item__title">Курс А1</div>
+                <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
+                <div class="courses-item__content">
+                  {% for courses1 in data.courses1 %}
+                  <div class="courses-item__inner">
+                    <div class="courses-item__icon">
+                      <img src="img/cources/checkbox.svg" alt="">
+                    </div>
+                    <div class="courses-item__text">{{courses1.text}}</div>
+                  </div>
+                  {% endfor %} 
+                </div>
+              </div>
+            </div>
+            <div class="courses-item courses-item_right revealator-slideleft revealator-once revealator-below">
+              <div class="courses-item__img reverse">
+                <img src="img/cources/cources-img2.jpg" alt="">
+              </div>
+              <div class="courses-item__descr">
+                <div class="courses-item__title">Курс А2</div>
+                <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
+                <div class="courses-item__content">
+                  {% for courses2 in data.courses2 %}
+                  <div class="courses-item__inner">
+                    <div class="courses-item__icon">
+                      <img src="img/cources/checkbox.svg" alt="">
+                    </div>
+                    <div class="courses-item__text">
+                      {{courses2.text}}
+                    </div>
+                  </div>
+                  {% endfor %} 
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="courses__descr">
-        <div class="courses-item revealator-slideright revealator-once revealator-below">
-          <div class="courses-item__img">
-            <img src="img/services.png" alt="">
-          </div>  
-          <div class="courses-item__descr">
-            <div class="courses-item__title">1. Курс А1</div>
-            <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
-            <div class="courses-item__content">
-              {% for courses1 in data.courses1 %}
-              <div class="courses-item__inner">
-                <div class="courses-item__icon">
-                  <img src="img/cources/checked.svg" alt="">
-                </div>
-                <div class="courses-item__text">{{courses1.text}}</div>
-              </div>
-              {% endfor %} 
-            </div>
-          </div>
-        </div>
-        <div class="courses-item courses-item_right revealator-slideleft revealator-once revealator-below">
-          <div class="courses-item__descr">
-            <div class="courses-item__title">2. Курс А2</div>
-            <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
-            <div class="courses-item__content">
-              {% for courses2 in data.courses2 %}
-              <div class="courses-item__inner">
-                <div class="courses-item__icon">
-                  <img src="img/cources/checked.svg" alt="">
-                </div>
-                <div class="courses-item__text">
-                  {{courses2.text}}
+      <div class="courses__section">
+        <div class="courses__block">
+          <div class="wrapper small">
+            <div class="courses-item revealator-slideright revealator-once revealator-below">
+              <div class="courses-item__img">
+                <img src="img/cources/cources-img3.jpg" alt="">
+              </div>  
+              <div class="courses-item__descr">
+                <div class="courses-item__title">Курс B1</div>
+                <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
+                <div class="courses-item__content">
+                  {% for courses3 in data.courses3 %}
+                  <div class="courses-item__inner">
+                    <div class="courses-item__icon">
+                      <img src="img/cources/checkbox.svg" alt="">
+                    </div>
+                    <div class="courses-item__text">{{courses3.text}}</div>
+                  </div>
+                  {% endfor %} 
                 </div>
               </div>
-              {% endfor %} 
             </div>
-          </div>
-          <div class="courses-item__img">
-            <img src="img/services.png" alt="">
-          </div>
-        </div>
-        <div class="courses-item revealator-slideright revealator-once revealator-below">
-          <div class="courses-item__img">
-            <img src="img/services.png" alt="">
-          </div>  
-          <div class="courses-item__descr">
-            <div class="courses-item__title">3. Курс B1</div>
-            <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
-            <div class="courses-item__content">
-              {% for courses3 in data.courses3 %}
-              <div class="courses-item__inner">
-                <div class="courses-item__icon">
-                  <img src="img/cources/checked.svg" alt="">
-                </div>
-                <div class="courses-item__text">{{courses3.text}}</div>
+            <div class="courses-item courses-item_right revealator-slideleft revealator-once revealator-below">
+              <div class="courses-item__img reverse">
+                <img src="img/cources/cources-img4.jpg" alt="">
               </div>
-              {% endfor %} 
-            </div>
-          </div>
-        </div>
-        <div class="courses-item courses-item_right revealator-slideleft revealator-once revealator-below">
-          <div class="courses-item__descr">
-            <div class="courses-item__title">4. Курс B2</div>
-            <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
-            <div class="courses-item__content">
-              {% for courses4 in data.courses4 %}
-              <div class="courses-item__inner">
-                <div class="courses-item__icon">
-                  <img src="img/cources/checked.svg" alt="">
-                </div>
-                <div class="courses-item__text">
-                  {{courses4.text}}
+              <div class="courses-item__descr">
+                <div class="courses-item__title">Курс B2</div>
+                <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
+                <div class="courses-item__content">
+                  {% for courses4 in data.courses4 %}
+                  <div class="courses-item__inner">
+                    <div class="courses-item__icon">
+                      <img src="img/cources/checkbox.svg" alt="">
+                    </div>
+                    <div class="courses-item__text">
+                      {{courses4.text}}
+                    </div>
+                  </div>
+                  {% endfor %} 
                 </div>
               </div>
-              {% endfor %} 
             </div>
           </div>
-          <div class="courses-item__img">
-            <img src="img/services.png" alt="">
-          </div>
-        </div>
-        <div class="courses-item revealator-slideright revealator-once revealator-below">
-          <div class="courses-item__img">
-            <img src="img/services.png" alt="">
-          </div>  
-          <div class="courses-item__descr">
-            <div class="courses-item__title">5. Курс C1</div>
-            <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
-            <div class="courses-item__content">
-              {% for courses5 in data.courses5 %}
-              <div class="courses-item__inner">
-                <div class="courses-item__icon">
-                  <img src="img/cources/checked.svg" alt="">
-                </div>
-                <div class="courses-item__text">{{courses5.text}}</div>
-              </div>
-              {% endfor %} 
-            </div>
-          </div>
-        </div>
-        <div class="courses-item courses-item_right revealator-slideleft revealator-once revealator-below">
-          <div class="courses-item__descr">
-            <div class="courses-item__title">6. Курс C2</div>
-            <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
-            <div class="courses-item__content">
-              {% for courses6 in data.courses6 %}
-              <div class="courses-item__inner">
-                <div class="courses-item__icon">
-                  <img src="img/cources/checked.svg" alt="">
-                </div>
-                <div class="courses-item__text">
-                  {{courses6.text}}
+        </div>  
+      </div>
+      <div class="courses__section bg-img-map">
+        <div class="courses__block">
+          <div class="wrapper small">
+            <div class="courses-item revealator-slideright revealator-once revealator-below">
+              <div class="courses-item__img">
+                <img src="img/cources/cources-img5.jpg" alt="">
+              </div>  
+              <div class="courses-item__descr">
+                <div class="courses-item__title">Курс C1</div>
+                <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
+                <div class="courses-item__content">
+                  {% for courses5 in data.courses5 %}
+                  <div class="courses-item__inner">
+                    <div class="courses-item__icon">
+                      <img src="img/cources/checkbox.svg" alt="">
+                    </div>
+                    <div class="courses-item__text">{{courses5.text}}</div>
+                  </div>
+                  {% endfor %} 
                 </div>
               </div>
-              {% endfor %} 
+            </div>
+            <div class="courses-item courses-item_right revealator-slideleft revealator-once revealator-below">
+              <div class="courses-item__img reverse">
+                <img src="img/cources/cources-img6.jpg" alt="">
+              </div>
+              <div class="courses-item__descr">
+                <div class="courses-item__title">Курс C2</div>
+                <div class="courses-item__subtitle">После прохождения полного курса Вы:</div>
+                <div class="courses-item__content">
+                  {% for courses6 in data.courses6 %}
+                  <div class="courses-item__inner">
+                    <div class="courses-item__icon">
+                      <img src="img/cources/checkbox.svg" alt="">
+                    </div>
+                    <div class="courses-item__text">
+                      {{courses6.text}}
+                    </div>
+                  </div>
+                  {% endfor %} 
+                </div>
+              </div>
             </div>
           </div>
-          <div class="courses-item__img">
-            <img src="img/services.png" alt="">
-          </div>
-        </div>
+        </div>  
       </div>
     </div>
   </div>

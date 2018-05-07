@@ -1,12 +1,17 @@
-@import "helpers/all";
+// @import "helpers/all";
+@import "reset";
+@import "mixins";
+
 
 @import "lib/slick";
 @import "lib/slick-theme";
-
 @import "lib/revealator";
+@import "fonts";
+@import "varibales";
+
 
 @import "base";
-
+@import "button";
 @import "header";
 @import "about";
 @import "courses";

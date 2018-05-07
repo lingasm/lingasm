@@ -1,35 +1,73 @@
 body, html {
-  font-family: 'Lato', sans-serif;
+  font-family: "HelveticaNeueRegular";
   position: relative;
   font-size: 14px;
   line-height: 1.4;
   overflow-x: hidden;
   -webkit-text-size-adjust: none;
 } 
+
 img {
   max-width: 100%;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
 }
 
 .wrapper {
   max-width: 1430px;
   padding: 0 15px;
   margin: 0 auto;
+  &.small {
+    max-width: 1000px;
+  }
+  &-bg {
+    position: absolute;
+    display: none;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    background: rgba(0,0,0,.75);
+    &.open {
+      display: block;
+    }
+  }
 }
 
 .title {
-  font-size: 30px;
   margin-bottom: 35px;
   text-align: center;
-  text-shadow: 1px 1px 2px black;
+  
+}
+
+.logo {
+  &-link {
+    display: flex;
+    align-items: center;
+  }
+  &__img {
+    margin-right: 5px;
+  }
+  &__text {
+    font-family: "SketchBlockBold";
+    font-size: 30px;
+    color: #000;
+  }
 }
 
 .h2 {
   position: relative;
+  font-family: "HelveticaNeueBold";
+  font-size: 45px;
   display: inline-block;
-  font-family: 'Raleway', sans-serif;
-  font-size: 28px;
   font-weight: bold;
   color: #1ab798;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px black;
   &:before {
     content: '';
     position: absolute;
@@ -49,7 +87,7 @@ img {
     right: -72px;
     top: 50%;
     transform: translateY(-50%);
-  }  
+  }
 }
 
 .s-line {
@@ -93,23 +131,10 @@ img {
   }    
 }
 
-.btn {
-  font-size: 16px;
-  color: #fff;
-  padding: 5px 15px;
-  background-color: #c0af96;
-  border: 2px solid #c0af96;
-  &-form {
-    max-width: 300px;
-    width: 100%;
-  }
-  &:hover {
-    color: #c0af96;
-    background-color: #fff;
-  }
-  &:focus {
-    box-shadow: none;
-  }
+.vertical-line {
+  width: 1px;
+  height: 100%;
+  background-color: $color-red
 }
 
 .progress-container {
@@ -159,8 +184,26 @@ img {
   }
 }
 
+.circle {
+  width: 18px;
+  img {
+    width: 100%;
+  }
+  &.small {
+    width: 9px;
 
+  }
+  &.big {
+    width: 30px;
+  }
+  &.opacity {
+    opacity: .5;
+  }
+}
 
+.stars-grid {
+  position: absolute;
+}
 
 @keyframes bounce {
   100% {

@@ -1,40 +1,10 @@
 .header {
   position: relative;
-  min-height: 100vh;
-  background-image: url(../img/header-section-bg2.jpg);
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
-  // &__nav {
-  //   position: relative;
-  //   background-color: #fff;
-  //   border-top: 1px dashed #c0c0c0;
-  //   border-bottom: 1px dashed #c0c0c0; 
-  //   box-shadow: 0 2px 20px 5px #f1f1f1;
-  //   &_hidden {
-  //     position: fixed;
-  //     top: -100%;
-  //     left: 0;
-  //     right: 0;
-  //   }
-  //   .logo {
-  //     position: absolute;
-  //     display: none;
-  //     left: 50px;
-  //     height: 62px;
-  //     img {
-  //       height: 100%;
-  //     }
-  //   }
-  //   &.fixed {
-  //     position: fixed;
-  //     top: 0;
-  //     left: 0;
-  //     right: 0;
-  //     padding: 10px 0;
-  //     z-index: 9999;
-  //   }
-  // }
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  padding-top: 90px;
+  background: linear-gradient(to bottom, rgba(252,252,252,1) 0%, rgba(239,239,239,1) 49%, rgba(225,225,225,1) 100%);
 }
 
 .topline {
@@ -42,35 +12,74 @@
   padding: 10px 15px;
   right: 0;
   left: 0;
-  background-color: #fff;
-  box-shadow: 0 -3px 33px 0px #362424;
+  background-color: #fcfcfc;
+  border-bottom: 1px solid #e1e1e1;
   z-index: 9999;
+  &.boxShadow {
+    box-shadow: 0 -3px 33px 0px #362424;
+  }
   &__content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1000px;
+    max-width: 1300px;
     margin: 0 auto;
   }
   &__right {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    .logo {
+      @media screen and (max-width: 1150px) {
+        display: none;
+      }
+    }
+    @media screen and (max-width: 1150px) {
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      right: 0;
+      padding-bottom: 25px;
+      background-color: #fff;
+      transform: translate(-100%,0);
+      transition: all .3s;
+      z-index: 9999;
+    }
+    &.open {
+      transform: translate(0, 0);
+    }
+  }
+  &__btn {
+    display: flex;
+    &-inner {
+      display: flex;
+      &.first {
+        margin-right: 15px;
+      }
+    }
   }
 }
+
+
 
 .main-nav {
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px 0;
+  @media screen and (max-width: 1150px) {
+    flex-direction: column;
+    width: 100%;
+  }
   &__item {
     margin: 0 20px;
     padding: 10px 0;
+    @media screen and (max-width: 1366px) {
+      margin: 0 10px;
+    }
   }
   &__link {
     position: relative;
     display: block;
-    font-size: 16px;
+    font-size: 17px;
     color: #000;
     text-decoration: none;
     &.active {
@@ -101,10 +110,102 @@
   }
 }
 
-.logo {
-  width: 100px;
+.nav-respons {
+  display: none;
+  @media screen and (max-width: 1150px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
-.mobile-menu-btn {
-  position: absolute;
+.navbar-responsive {
+  &__btn {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 56px;
+    height: 42px;
+    font-size: 0;
+    text-indent: -9999px;
+    appearance: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+    @media screen and (max-width: 1150px) {
+      display: block;
+    }
+    &:focus {
+      outline: none
+    }
+    span {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 6px;
+      right: 6px ;
+      height: 4px;
+      border-radius: 2px;
+      background: $color-red;
+      &::before, 
+      &::after {
+        content: "";
+        position: absolute;
+        display: block;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        border-radius: 2px;
+        background-color: $color-red;
+      }
+      &::before {
+        top: -12px;
+      }
+      &::after {
+        bottom: -12px; 
+      }
+    }
+    &-active {
+      // background-color: #5fa610;
+      span {
+        transition: background 0 0.3s;
+        &::before, 
+        &::after {
+          transition-duration: 0.3s, 0.3s;
+          transition-delay: 0.3s, 0;
+        }
+        &::before {
+          transition-property: top, transform;
+        }
+        &::after {
+          transition-property: bottom, transform;
+        }
+      }
+      &.active {
+        opacity: 0.7;
+        span {
+          background: none;
+          &::before, 
+          &::after {
+            transition-delay: 0, 0.3s;
+          }
+          &::before {
+            top: 0;
+            transform: rotate(45deg); 
+          }
+          &::after {
+            bottom: 0;
+            transform: rotate(-45deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+.map {
+  display: flex;
 }

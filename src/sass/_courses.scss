@@ -1,51 +1,69 @@
 .courses {
   position: relative;
-  background: #f8f8f8;
-  background-image: url(../img/bg-1.jpg);
-  background-size: cover;
-  background-position: center center;
-  background-attachment: fixed;
   &__content {
-    padding: 80px 35px;
-    background-color: rgba(255,255,255,.9);
+    padding: 80px 0;
   }
-  &__descr {
-    max-width: 900px;
-    margin: 0 auto;
+  &__block {
+    padding: 30px 0;
+    background-color: rgba(255,255,255,.8);   
+  }
+  &__section {
+    // background-color: #7c7c7c;
+    &.bg-img {
+      background-image: url(../img/bg-1.jpg);
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
+    &.bg-img-map {
+      background-image: url(../img/cources/bitmap.jpg);
+      background-size: cover;
+      background-position: center center;
+      background-attachment: fixed;
+    }
   }
 }
 
 .courses-item {
   display: flex;
-  margin-bottom: 50px;
+  align-items: flex-start;
+  padding: 20px 0;
   &__inner {
     display: flex;
   }
   &__img {
-    flex: 0 0 240px;
+    flex: 0 0 260px;
+    padding: 10px;
+    border: 1px solid $color-red;
     img {
 
     }
+    &.reverse {
+      order: 1;
+    }
   }
   &__icon {
-    flex: 0 0 32px;
+    flex: 0 0 28px;
+    padding-top: 3px;
   }
   &__title {
-    font-size: 22px;
-    margin-bottom: 15px;
-    font-weight: bold;
+    font-family: "HelveticaNeueBold";
+    font-size: 29px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
   }
   &__subtitle {
-    font-size: 18px;
+    font-family: "HelveticaNeueBold";
+    font-size: 20px;
     margin-bottom: 15px;
   }
   &__descr {
     flex: 0 0 calc(100% - 240px);
-    padding-left: 40px;
+    padding: 0 40px;
   }
   &__text {
-    font-size: 16px;
-    padding-top: 6px;
+    font-size: 17px;
+    margin-bottom: 18px;
   }
   &_right {
     .courses-item__descr {

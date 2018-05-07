@@ -1,0 +1,99 @@
+.btn {
+  position: relative;
+  display: inline-block;
+  font-size: 17px;
+  color: #000;
+  padding: 5px 15px;
+  // background-color: $color-red;
+  border: 2px solid $color-red;
+  cursor: pointer;
+  z-index: 100;
+  overflow: hidden;
+
+  &-form {
+    max-width: 300px;
+    width: 100%;
+  }
+  &-topline {
+    @media screen and (max-width: 1150px) {
+      min-width: 160px;
+      text-align: center;
+    }
+  }
+  &:before,
+  &:after {
+    position: absolute;
+    top: 50%;
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: $color-red;
+    border-radius: 50%;
+    z-index: -1;
+  }
+  &:before {
+    left: -20px;
+    transform: translate(-50%, -50%);
+    // animation: criss-cross-left 0.8s reverse;
+  }
+  &:after {
+    right: -20px;
+    transform: translate(50%, -50%);
+    // animation: criss-cross-right 0.8s reverse;
+  }
+  &:hover, &:focus {
+    color: #fff;
+    border: 2px solid $color-red;
+    &:before {
+      animation: criss-cross-left 0.6s both;
+      animation-direction: alternate;
+    }
+    &:after {
+      animation: criss-cross-right 0.6s both;
+      animation-direction: alternate;
+    }
+  }
+  &_bg {
+    color: $color-white;
+    background-color: $color-red;
+    &:hover, &:focus {
+      color: #000;
+    }
+    &:before,
+    &:after {
+      background-color: $color-white;
+    }
+  }
+}
+
+@keyframes criss-cross-right {
+  0% {
+    right: -20px;
+  }
+  50% {
+    right: 50%;
+    width: 40%;
+    height: 100%;
+  }
+  100% {
+    right: 50%;
+    width: 150%;
+    height: 150%;
+  }
+}
+
+@keyframes criss-cross-left {
+  0% {
+    left: -20px;
+  }
+  50% {
+    left: 50%;
+    width: 40%;
+    height: 100%;
+  }
+  100% {
+    left: 50%;
+    width: 150%;
+    height: 150%;
+  }
+}
