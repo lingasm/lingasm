@@ -218,7 +218,62 @@
 }
 
 .map {
+  display: flex;
+  justify-content: center;
   width: 100%;
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+  &__block {
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 1200px) {
+      max-height: 50vh;
+    }
+    &.left {
+      @media screen and (max-width: 1400px) {
+        // margin-right: -40px;
+      }
+    }
+  }
+  &__itm1 {
+    width: 459px;
+    @media screen and (max-width: 1400px) {
+      width: 413px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 350px;
+    }
+  }
+  &__itm2 {
+    width: 342px;
+    @media screen and (max-width: 1400px) {
+      width: 308px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 261px;
+    }
+  }
+  &__itm3 {
+    width: 274px;
+    @media screen and (max-width: 1400px) {
+      width: 245px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 208px;
+      width: 40%;
+    }
+  }
+  &__itm4 {
+    width: 271px;
+    @media screen and (max-width: 1400px) {
+      width: 245px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 208px;
+      width: 40%;
+    }
+  }
 }
 
 /* Animate scroll-down*/
@@ -417,9 +472,9 @@ $animDuration: 5s;
     // stroke: none;
   }
   .circle-show {
-    transition: all 1.4s ease;
+    transition: all .8s ease;
     &.top {
-      animation: circleShowTop 5s linear 1;
+      animation: circleShowTop 1.5s linear 1;
       animation-timing-function: ease-in;
     }
   }
@@ -445,7 +500,7 @@ $animDuration: 5s;
 }
 
 @keyframes circleShowTop {
-  0% {  opacity: 0; }
-  100% {  opacity: 1!important; }
+  0% {  opacity: 0; transform: scale(.3); }
+  100% {  opacity: 1!important; transform: scale(1); }
 }
 

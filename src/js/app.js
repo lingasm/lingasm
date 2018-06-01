@@ -33,6 +33,18 @@ $(document).ready(function () {
     }
   });
 
+  $('.anchorJS').on('click', function(e) {
+    var _self = $(this),
+        togglesHidden = $('.topline__right'),
+        contentOut = $('.content-out'),
+        wrapperBg = $('.wrapper-bg');
+    _self.closest(contentOut).find(togglesHidden).removeClass('open');
+    _self.closest(contentOut).find('.navbar-responsive__btn').removeClass('active');
+    _self.closest('.content-out').find(wrapperBg).fadeOut();
+    _self.closest('body').removeClass('no-scroll');
+
+  });
+
   $(".js-nav-swipe").on('swiperight',  function() {
     var _self = $(this),
     wrapperBg = $('.wrapper-bg');
