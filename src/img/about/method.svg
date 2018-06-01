@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="53px" height="50px" viewBox="0 0 53 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>01_Method</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="12 0 0 0 0 27 24 27 24 0"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01_Method">
+            <g id="copyright">
+                <path d="M41,8 L41,46.5862069 C41,48.4716164 39.7847917,50 38.2857143,50 L3,50 L3,0 L31.952381,0 L41,8 Z" id="Fill-1" fill="#F2F2F2"></path>
+                <polygon id="Fill-2" fill="#D0D0D0" points="32 6 32 8 41 8 32 0"></polygon>
+                <path d="M39,50 C37.4972529,50 36.2790698,48.656875 36.2790698,47 L36.2790698,43 L0,43 L0,47 C0,48.656875 1.21818314,50 2.72093023,50 L39,50" id="Fill-3" fill="#D0D0D0"></path>
+                <polygon id="Fill-10" fill="#8A8F8D" points="7 17 12 17 12 16 7 16"></polygon>
+                <polygon id="Fill-11" fill="#8A8F8D" points="14 17 38 17 38 16 14 16"></polygon>
+                <polygon id="Fill-12" fill="#8A8F8D" points="7 22 37 22 37 21 7 21"></polygon>
+                <polygon id="Fill-13" fill="#8A8F8D" points="7 27 33 27 33 26 7 26"></polygon>
+                <polygon id="Fill-14" fill="#8A8F8D" points="7 32 30 32 30 31 7 31"></polygon>
+            </g>
+            <g id="author-sign" transform="translate(29.000000, 14.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <g id="Clip-2"></g>
+                <path d="M5.04637379,19.9006859 L0.926170893,24.2746879 C0.472439308,24.7564884 0.152779743,25.3518916 0,26 L5.85035553,21.3307225 C7.68173774,22.1550539 9.14464708,22.4175249 10.2658287,22.4175249 C12.2356827,22.4175249 13.1500746,21.6067654 13.1500746,21.6067654 C11.3162673,20.6382067 11.0550521,18.830901 11.0550521,18.830901 C12.4595171,19.4334417 15.3851626,20.1437837 15.3851626,20.1437837 C19.2704103,17.5121113 21.3008912,11.8139754 21.3008912,11.8139754 C20.8985366,11.9263123 20.5139543,11.9730051 20.1514055,11.9730051 C18.3278529,11.9730051 17.0749897,10.7880001 17.0749897,10.7880001 L22.1508801,9.66603739 C23.8385593,6.15194896 24,0 24,0 L8.56720201,13.9307262 C6.81945026,15.5082599 5.59052604,17.5920657 5.04637379,19.9006859 Z" id="Fill-3" fill="#D0021B" mask="url(#mask-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

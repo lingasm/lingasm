@@ -3,8 +3,9 @@
 //=include lib/jquery.min.js
 //=include lib/slick.min.js
 //=include lib/classie.js
+//=include lib/svganimations.js
 //=include lib/fm.revealator.jquery.js
-
+//=include lib/detect_swipe.js
 
 $(document).ready(function () {
 
@@ -12,45 +13,71 @@ $(document).ready(function () {
 
  $(document).on('click', '.anchorJS', scrollNav )
 
-  function scrollNav() {
+  function scrollNav(e) {
+    e.preventDefault();
     $('html, body').animate({
         scrollTop: ($( $(this).data('href') ).offset().top - 40)
     }, 1000);
     return false;
   }
 
-  function navbarResponsive() {  
+  $('.wrapper-bg').on('click', function(e) {
+    var _self = $(this),
+        togglesHidden = $('.topline__right'),
+        contentOut = $('.content-out');
+    if (!$(e.target).closest($('.topline')).length){
+      _self.fadeToggle();
+      _self.closest(contentOut).find(togglesHidden).toggleClass('open');
+      _self.closest(contentOut).find('.navbar-responsive__btn').removeClass('active');
+      _self.closest('body').toggleClass('no-scroll');
+    }
+  });
+
+  $(".js-nav-swipe").on('swiperight',  function() {
+    var _self = $(this),
+    wrapperBg = $('.wrapper-bg');
+    _self.removeClass('open');
+    _self.closest('.topline').find('.navbar-responsive__btn').removeClass('active');
+    _self.closest('.content-out').find(wrapperBg).fadeToggle();
+    _self.closest('body').toggleClass('no-scroll');
+  })
+
+
+  function navbarResponsive() {
     var toggles = $('.navbar-responsive__btn'),
         wrapperBg = $('.wrapper-bg'),
         togglesHidden = $('.topline__right');
 
-    toggles.on("click", function (){      
+    toggles.on("click", function (){
       $(this).toggleClass('active');
       $(this).closest('.topline').find(togglesHidden).toggleClass('open');
       $(this).closest('.content-out').find(wrapperBg).fadeToggle();
+      $(this).closest('body').toggleClass('no-scroll');
     });
     toggles.mouseup(function(){
       return false;
-    });     
+    });
   };
   navbarResponsive();
 
-var menu_selector = ".main-nav"; 
-function onScroll(){
-  var scroll_top = $(document).scrollTop();
-  $(menu_selector + " a").each(function(){
-    var hash = $(this).attr("href");
-    var target = $(hash);
-    if ((target.position().top - 80) <= scroll_top && target.position().top + target.outerHeight() > scroll_top) {
-      $(menu_selector + " a.active").removeClass("active");
-      $(this).addClass("active");
-    } else {
-      $(this).removeClass("active");
+$(function () {
+  var menu_selector = ".main-nav";
+    function onScroll(){
+      var scroll_top = $(document).scrollTop();
+      $(menu_selector + " a").each(function(){
+        var hash = $(this).attr("href");
+        var target = $(hash);
+        if ((target.position().top - 80) <= scroll_top && target.position().top + target.outerHeight() > scroll_top) {
+          $(menu_selector + " a.active").removeClass("active");
+          $(this).addClass("active");
+        } else {
+          $(this).removeClass("active");
+        }
+      });
     }
-  });
-}
 
-$(document).on("scroll", onScroll);
+  $(document).on("scroll", onScroll);
+
   $("a[href^=#]").click(function(e){
     e.preventDefault();
     $(document).off("scroll");
@@ -65,10 +92,23 @@ $(document).on("scroll", onScroll);
       $(document).on("scroll", onScroll);
     });
   });
+});
 
 /* End active menu */
+  var authorCourseTop = $('.author-course__top'),
+      authorCourseDescr = $('.author-course__descr'),
+      authorCourseHidden = $('.author-course__hidden');
 
-});	
+    authorCourseTop.on("click", function () {
+      var _this = $(this);
+      _this.toggleClass('open');
+      _this.closest(authorCourseDescr).find(authorCourseHidden).slideToggle();
+
+    });
+/* End author-courses */
+
+
+});
 
 $(window).on('load', function(){
   $(window).scroll(function() {

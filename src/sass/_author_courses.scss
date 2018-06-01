@@ -1,6 +1,127 @@
 .auth-courses  {
   position: relative;
+  padding: 80px 0 0 0;
+  @media screen and (max-width: 1366px) {
+    padding: 20px 0 0 0;
+  }
   &__content {
     padding: 80px 0;
+    @media screen and (max-width: 1366px) {
+      padding: 50px 0;
+    }
   }
+  .stars-grid {
+    &.top {
+      top: -70px;
+      @media screen and (max-width: 1200px) {
+        width: 400px;
+      }
+    }
+  }
+}
+
+.author-course {
+  display: flex;
+  &__number {
+    font-family: "HelveticaNeueBold";
+    flex: 1 0 150px;
+    font-size: 18px;
+    color: $color-red;
+    @media screen and (max-width: 1200px) {
+      flex: 1 0 60px;
+    }
+    @media screen and (max-width: 1200px) {
+      flex: 1 0 60px;
+    }
+    @media screen and (max-width: 700px) {
+      flex: 0;
+      margin-right: 20px;
+    }
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
+  }
+  &__descr {
+    flex: 1 0 calc(100% - 150px);
+  }
+  &__top {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+    @media screen and (max-width: 500px) {
+      padding-left: 40px;
+    }
+    &.open {
+      .author-course__icon {
+        svg {
+          transform: rotate(180deg);
+          fill: #464646;
+        }
+      }
+    }
+    &-num {
+      font-family: "HelveticaNeueBold";
+      position: absolute;
+      display: none;
+      left: 12px;
+      top: 0;
+      font-size: 18px;
+      color: $color-red;
+      @media screen and (max-width: 500px) {
+        display: block;
+      }
+    }
+  }
+  &__title {
+    font-family: "HelveticaNeueRegular";
+    font-size: 38px;
+    @include css-lock(20,38,320,1920);
+    margin-bottom: 20px;
+    color: $color-red;
+    line-height: 1;
+  }
+  &__subtitle {
+    font-family: "HelveticaNeueBold";
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  &__icon {
+    margin: 5px 0 0 20px;
+    @media screen and (max-width: 1200px) {
+      margin: 5px 50px 0 20px;
+    }
+    @media screen and (max-width: 700px) {
+      margin: 5px 0 0 20px;
+    }
+    svg {
+      font-size: 25px;
+      fill: $color-red;
+      transition: all .4s;
+    }
+  }
+  &__hidden {
+    display: none;
+    padding-left: 50px;
+    @media screen and (max-width: 700px) {
+      padding-left: 20px;
+    }
+  }
+  &__text {
+    font-family: "HelveticaNeueLight";
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+  &__bottom {
+    margin-bottom: 15px;
+  }
+  &__list {
+    margin: 10px 0 0 35px;
+    list-style-type: square;
+    li {
+      font-size: 17px;
+    }
+  }
+
 }

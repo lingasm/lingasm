@@ -2755,6 +2755,184 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 })(window);
 
+/**
+ * svganimations.js v1.0.0
+ * http://www.codrops.com
+ *
+ * the svg path animation is based on http://24ways.org/2013/animating-vectors-with-svg/ by Brian Suda (@briansuda)
+ *
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ * Copyright 2013, Codrops
+ * http://www.codrops.com
+ */
+(function () {
+
+  'use strict';
+
+  var docElem = window.document.documentElement;
+
+  window.requestAnimFrame = function () {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function ( /* function */callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+  }();
+
+  window.cancelAnimFrame = function () {
+    return window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || function (id) {
+      window.clearTimeout(id);
+    };
+  }();
+
+  function SVGEl(el) {
+    this.el = el;
+    this.image = this.el.previousElementSibling;
+    this.current_frame = 0;
+    this.total_frames = 60;
+    this.path = new Array();
+    this.length = new Array();
+    this.handle = 0;
+    this.init();
+  }
+
+  SVGEl.prototype.init = function () {
+    var self = this;
+    [].slice.call(this.el.querySelectorAll('path')).forEach(function (path, i) {
+      self.path[i] = path;
+      var l = self.path[i].getTotalLength();
+      self.length[i] = l;
+      self.path[i].style.strokeDasharray = l + ' ' + l;
+      self.path[i].style.strokeDashoffset = l;
+    });
+  };
+
+  SVGEl.prototype.render = function () {
+    if (this.rendered) return;
+    this.rendered = true;
+    this.draw();
+  };
+
+  SVGEl.prototype.draw = function () {
+    var self = this,
+        progress = this.current_frame / this.total_frames;
+    if (progress > 1) {
+      window.cancelAnimFrame(this.handle);
+      this.showImage();
+    } else {
+      this.current_frame++;
+      for (var j = 0, len = this.path.length; j < len; j++) {
+        this.path[j].style.strokeDashoffset = Math.floor(this.length[j] * (1 - progress));
+      }
+      this.handle = window.requestAnimFrame(function () {
+        self.draw();
+      });
+    }
+  };
+
+  SVGEl.prototype.showImage = function () {
+    classie.add(this.image, 'hide');
+    classie.add(this.el, 'show');
+  };
+
+  function getViewportH() {
+    var client = docElem['clientHeight'],
+        inner = window['innerHeight'];
+
+    if (client < inner) return inner;else return client;
+  }
+
+  function scrollY() {
+    return window.pageYOffset || docElem.scrollTop;
+  }
+
+  // http://stackoverflow.com/a/5598797/989439
+  function getOffset(el) {
+    var offsetTop = 0,
+        offsetLeft = 0;
+    do {
+      if (!isNaN(el.offsetTop)) {
+        offsetTop += el.offsetTop;
+      }
+      if (!isNaN(el.offsetLeft)) {
+        offsetLeft += el.offsetLeft;
+      }
+    } while (el = el.offsetParent);
+
+    return {
+      top: offsetTop,
+      left: offsetLeft
+    };
+  }
+
+  function inViewport(el, h) {
+    var elH = el.offsetHeight,
+        scrolled = scrollY(),
+        viewed = scrolled + getViewportH(),
+        elTop = getOffset(el).top,
+        elBottom = elTop + elH,
+
+    // if 0, the element is considered in the viewport as soon as it enters.
+    // if 1, the element is considered in the viewport only when it's fully inside
+    // value in percentage (1 >= h >= 0)
+    h = h || 0;
+
+    return elTop + elH * h <= viewed && elBottom >= scrolled;
+  }
+
+  function init() {
+    var svgs = Array.prototype.slice.call(document.querySelectorAll('#main svg')),
+        svgArr = new Array(),
+        didScroll = false,
+        resizeTimeout;
+
+    // the svgs already shown...
+    svgs.forEach(function (el, i) {
+      var svg = new SVGEl(el);
+      svgArr[i] = svg;
+      setTimeout(function (el) {
+        return function () {
+          if (inViewport(el.parentNode)) {
+            svg.render();
+          }
+        };
+      }(el), 250);
+    });
+
+    var scrollHandler = function scrollHandler() {
+      if (!didScroll) {
+        didScroll = true;
+        setTimeout(function () {
+          scrollPage();
+        }, 60);
+      }
+    },
+        scrollPage = function scrollPage() {
+      svgs.forEach(function (el, i) {
+        if (inViewport(el.parentNode, 0.5)) {
+          svgArr[i].render();
+        }
+      });
+      didScroll = false;
+    },
+        resizeHandler = function resizeHandler() {
+      function delayed() {
+        scrollPage();
+        resizeTimeout = null;
+      }
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(delayed, 200);
+    };
+
+    window.addEventListener('scroll', scrollHandler, false);
+    window.addEventListener('resize', resizeHandler, false);
+  }
+
+  init();
+})();
+
 /*
  Revealator jQuery Plugin
  Revealator is a jQuery-based plugin for adding effects to elements that enter the window. It's simple, and easy to use.
@@ -2878,6 +3056,92 @@ $(function () {
     }
   });
 });
+/**
+ * jquery.detectSwipe v2.1.3
+ * jQuery Plugin to obtain touch gestures from iPhone, iPod Touch, iPad and Android
+ * http://github.com/marcandre/detect_swipe
+ * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)
+ */
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory);
+  } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object') {
+    // Node/CommonJS
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+})(function ($) {
+
+  $.detectSwipe = {
+    version: '2.1.2',
+    enabled: 'ontouchstart' in document.documentElement,
+    preventDefault: true,
+    threshold: 20
+  };
+
+  var startX,
+      startY,
+      isMoving = false;
+
+  function onTouchEnd() {
+    this.removeEventListener('touchmove', onTouchMove);
+    this.removeEventListener('touchend', onTouchEnd);
+    isMoving = false;
+  }
+
+  function onTouchMove(e) {
+    if ($.detectSwipe.preventDefault) {
+      e.preventDefault();
+    }
+    if (isMoving) {
+      var x = e.touches[0].pageX;
+      var y = e.touches[0].pageY;
+      var dx = startX - x;
+      var dy = startY - y;
+      var dir;
+      var ratio = window.devicePixelRatio || 1;
+      if (Math.abs(dx) * ratio >= $.detectSwipe.threshold) {
+        dir = dx > 0 ? 'left' : 'right';
+      } else if (Math.abs(dy) * ratio >= $.detectSwipe.threshold) {
+        dir = dy > 0 ? 'up' : 'down';
+      }
+      if (dir) {
+        onTouchEnd.call(this);
+        $(this).trigger('swipe', dir).trigger('swipe' + dir);
+      }
+    }
+  }
+
+  function onTouchStart(e) {
+    if (e.touches.length == 1) {
+      startX = e.touches[0].pageX;
+      startY = e.touches[0].pageY;
+      isMoving = true;
+      this.addEventListener('touchmove', onTouchMove, false);
+      this.addEventListener('touchend', onTouchEnd, false);
+    }
+  }
+
+  function setup() {
+    this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
+  }
+
+  function teardown() {
+    this.removeEventListener('touchstart', onTouchStart);
+  }
+
+  $.event.special.swipe = { setup: setup };
+
+  $.each(['left', 'up', 'down', 'right'], function () {
+    $.event.special['swipe' + this] = { setup: function setup() {
+        $(this).on('swipe', $.noop);
+      } };
+  });
+});
 
 $(document).ready(function () {
 
@@ -2885,12 +3149,34 @@ $(document).ready(function () {
 
   $(document).on('click', '.anchorJS', scrollNav);
 
-  function scrollNav() {
+  function scrollNav(e) {
+    e.preventDefault();
     $('html, body').animate({
       scrollTop: $($(this).data('href')).offset().top - 40
     }, 1000);
     return false;
   }
+
+  $('.wrapper-bg').on('click', function (e) {
+    var _self = $(this),
+        togglesHidden = $('.topline__right'),
+        contentOut = $('.content-out');
+    if (!$(e.target).closest($('.topline')).length) {
+      _self.fadeToggle();
+      _self.closest(contentOut).find(togglesHidden).toggleClass('open');
+      _self.closest(contentOut).find('.navbar-responsive__btn').removeClass('active');
+      _self.closest('body').toggleClass('no-scroll');
+    }
+  });
+
+  $(".js-nav-swipe").on('swiperight', function () {
+    var _self = $(this),
+        wrapperBg = $('.wrapper-bg');
+    _self.removeClass('open');
+    _self.closest('.topline').find('.navbar-responsive__btn').removeClass('active');
+    _self.closest('.content-out').find(wrapperBg).fadeToggle();
+    _self.closest('body').toggleClass('no-scroll');
+  });
 
   function navbarResponsive() {
     var toggles = $('.navbar-responsive__btn'),
@@ -2901,6 +3187,7 @@ $(document).ready(function () {
       $(this).toggleClass('active');
       $(this).closest('.topline').find(togglesHidden).toggleClass('open');
       $(this).closest('.content-out').find(wrapperBg).fadeToggle();
+      $(this).closest('body').toggleClass('no-scroll');
     });
     toggles.mouseup(function () {
       return false;
@@ -2908,38 +3195,51 @@ $(document).ready(function () {
   };
   navbarResponsive();
 
-  var menu_selector = ".main-nav";
-  function onScroll() {
-    var scroll_top = $(document).scrollTop();
-    $(menu_selector + " a").each(function () {
+  $(function () {
+    var menu_selector = ".main-nav";
+    function onScroll() {
+      var scroll_top = $(document).scrollTop();
+      $(menu_selector + " a").each(function () {
+        var hash = $(this).attr("href");
+        var target = $(hash);
+        if (target.position().top - 80 <= scroll_top && target.position().top + target.outerHeight() > scroll_top) {
+          $(menu_selector + " a.active").removeClass("active");
+          $(this).addClass("active");
+        } else {
+          $(this).removeClass("active");
+        }
+      });
+    }
+
+    $(document).on("scroll", onScroll);
+
+    $("a[href^=#]").click(function (e) {
+      e.preventDefault();
+      $(document).off("scroll");
+      $(menu_selector + " a.active").removeClass("active");
+      $(this).addClass("active");
       var hash = $(this).attr("href");
       var target = $(hash);
-      if (target.position().top - 80 <= scroll_top && target.position().top + target.outerHeight() > scroll_top) {
-        $(menu_selector + " a.active").removeClass("active");
-        $(this).addClass("active");
-      } else {
-        $(this).removeClass("active");
-      }
-    });
-  }
-
-  $(document).on("scroll", onScroll);
-  $("a[href^=#]").click(function (e) {
-    e.preventDefault();
-    $(document).off("scroll");
-    $(menu_selector + " a.active").removeClass("active");
-    $(this).addClass("active");
-    var hash = $(this).attr("href");
-    var target = $(hash);
-    $("html, body").animate({
-      scrollTop: target.offset().top
-    }, 500, function () {
-      window.location.hash = hash;
-      $(document).on("scroll", onScroll);
+      $("html, body").animate({
+        scrollTop: target.offset().top
+      }, 500, function () {
+        window.location.hash = hash;
+        $(document).on("scroll", onScroll);
+      });
     });
   });
 
   /* End active menu */
+  var authorCourseTop = $('.author-course__top'),
+      authorCourseDescr = $('.author-course__descr'),
+      authorCourseHidden = $('.author-course__hidden');
+
+  authorCourseTop.on("click", function () {
+    var _this = $(this);
+    _this.toggleClass('open');
+    _this.closest(authorCourseDescr).find(authorCourseHidden).slideToggle();
+  });
+  /* End author-courses */
 });
 
 $(window).on('load', function () {

@@ -4,18 +4,27 @@
   &__content {
     display: flex;
     padding: 80px 0;
+    @media screen and (max-width: 1366px) {
+      padding: 50px 0;
+    }
   }
   &__title {
     font-family: "HelveticaNeueRegular";
     position: relative;
     font-size: 35px;
+    @include css-lock(20,35,320,1920);
     text-transform: uppercase;
+    text-align: center;
     line-height: 1.1;
     z-index: 10;
   }
   &__left {
     position: relative;
     width: 35%;
+    flex-shrink: 2;
+    @media screen and (max-width: 700px) {
+      display: none;
+    }
     .stars-grid {
       bottom: -330px;
       right: 0;
@@ -50,7 +59,11 @@
     }
   }
   &__right {
-    width: 65%;
+    width: 630px;
+    flex-shrink: 1;
+    @media screen and (max-width: 700px) {
+      width: 100%;
+    }
   }
   &__descr {
     position: relative;
@@ -58,6 +71,9 @@
     flex-direction: column;
     padding: 60px;
     box-shadow: 4px 4px 40px rgba(0,0,0,.3);
+    @media screen and (max-width: 550px) {
+      padding: 50px 20px;
+    }
     .stars-grid {
       top: -380px;
       right: -150px;
@@ -72,21 +88,25 @@
 .about-item {
   display: flex;
   &__content {
-    flex: 1 0 calc(100% - 30px);
-    padding-left: 20px;
+    flex: 1 0 calc(100% - 45px);
+    padding-left: 15px;
   }
   &__icon {
-    flex: 1 0 30px;
-    img {
-
+    flex: 1 0 45px;
+    @media screen and (max-width: 450px) {
+      flex: 1 0 35px;
+    }
+    &.top {
+      margin-top: -30px;
     }
   }
   &__title {
     font-size: 18px;
+    @include css-lock(15,18,320,1920)
     font-weight: bold;
     text-transform: uppercase;
   }
-  
+
   &__text {
     font-size: 14px;
     max-width: 340px;

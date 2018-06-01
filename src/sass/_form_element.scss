@@ -1,7 +1,14 @@
 .order-form{
-	max-width: 800px;
-	margin: 0 auto;
-	
+	max-width: 550px;
+	padding: 50px;
+	background-color: #fff;
+	box-shadow: 0 0 20px 0 rgba(0,0,0,.4);
+	@media screen and (max-width: 768px) {
+    padding: 50px 35px;
+  }
+  @media screen and (max-width: 550px) {
+    padding: 50px 20px;
+  }
 	&__inner {
 		display: flex;
 		justify-content: space-between;
@@ -11,7 +18,7 @@
 		position: relative;
 		z-index: 1;
 		display: inline-block;
-		width: 350px;
+		width: 100%;
 		vertical-align: top;
 		&-big {
 			width: 100%;
@@ -22,14 +29,15 @@
 	}
 	&__textarea {
 		font-size: 14px;
-		height: 200px;
+		height: 100px;
 		width: 100%;
-		color: #5198fc;
+		color: #000000;
 		padding: 10px;
-		border: 1px solid #5198fc;
+		font-weight: 700;
+		border: 1px solid #9b9b9b;
 		resize: none;
 		&::placeholder {
-			color: #5198fc;
+			color: #9b9b9b;
 		}
 	}
 	&__input {
@@ -43,7 +51,7 @@
 		color: #aaa;
 		width: 100%;
 		background: transparent;
-		color: #5198FC;
+		color: #000;
 		font-weight: bold;
 		font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 		-webkit-appearance: none; /* for box shadows to show on iOS */
@@ -63,11 +71,10 @@
 		align-items: center;
 		font-size: 14px;
 		padding: 0 10px;
-		color: #6a7989;
+		color: #9b9b9b;
 		position: absolute;
 		width: 100%;
 		height: 100%;
-		color: #5198FC;
 		cursor: text;
 		-webkit-font-smoothing: antialiased;
 	    -moz-osx-font-smoothing: grayscale;
@@ -98,7 +105,7 @@
 	transform: scale3d(1, -1, 1);
 	transition: stroke-dashoffset 0.3s;
 	pointer-events: none;
-	stroke: #5198FC;
+	stroke: #9b9b9b;
 	stroke-width: 4px;
 	stroke-dasharray: 962;
 	stroke-dashoffset: 558;

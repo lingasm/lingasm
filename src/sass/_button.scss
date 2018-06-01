@@ -11,13 +11,24 @@
   overflow: hidden;
 
   &-form {
-    max-width: 300px;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d0021b;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 20px;
+    margin: 0 auto;
+    img {
+      margin-left: 25px;
+    }
   }
   &-topline {
     @media screen and (max-width: 1150px) {
-      min-width: 160px;
       text-align: center;
+    }
+    @media screen and (max-width: 550px) {
+      min-width: 230px;
     }
   }
   &:before,
