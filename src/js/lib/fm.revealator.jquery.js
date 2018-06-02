@@ -48,7 +48,7 @@ $(function () {
 		var window_bottom = $window.height() - Revealator.effects_padding;
 		var document_top = Revealator.scroll_padding;
 		var document_bottom = $document.height() - Revealator.scroll_padding;
-		
+
 		if ($window.scrollTop() === 0) {
 			if (!$body.hasClass('at-top')) {
 				$body.addClass('at-top').removeClass('at-bottom').removeClass('near-top').removeClass('near-bottom');
@@ -70,7 +70,7 @@ $(function () {
 				$body.removeClass('at-top').removeClass('at-bottom').removeClass('near-top').removeClass('near-bottom');
 			}
 		}
-		
+
 		$('*[class*="revealator"]').each(function () {
 			i++;
 			var element = this;

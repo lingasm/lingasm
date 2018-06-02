@@ -85,6 +85,7 @@
   &__subtitle {
     font-family: "HelveticaNeueBold";
     font-size: 20px;
+    @include css-lock(16,20,320,1920);
     text-transform: uppercase;
   }
   &__icon {

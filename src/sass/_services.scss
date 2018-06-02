@@ -56,12 +56,14 @@
 
 .services-item {
   position: relative;
-  padding: 30px 35px 45px 35px;
-  background-color: #fff;
   margin-bottom: 65px;
-  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.4);
-  @media screen and (max-width: 550px) {
-    padding: 30px 20px 45px 20px;
+  &__content {
+    padding: 30px 35px 45px 35px;
+    background-color: #fff;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.4);
+    @media screen and (max-width: 550px) {
+      padding: 30px 20px 45px 20px;
+    }
   }
   &__index {
     font-family: "HelveticaNeueBold";

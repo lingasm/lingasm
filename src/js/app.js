@@ -5,6 +5,8 @@
 //=include lib/classie.js
 //=include lib/svganimations.js
 //=include lib/fm.revealator.jquery.js
+
+//=include lib/css3-animate-it.js
 //=include lib/detect_swipe.js
 
 $(document).ready(function () {
