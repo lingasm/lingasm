@@ -134,6 +134,17 @@ a {
   }
 }
 
+.drop-caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  border-top: 6px dashed;
+  border-right: 6px solid transparent;
+  border-left: 6px solid transparent;
+  transition: all .3s;
+}
+
 .vertical-line {
   width: 1px;
   height: 100%;

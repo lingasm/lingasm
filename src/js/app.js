@@ -4,7 +4,6 @@
 //=include lib/slick.min.js
 //=include lib/classie.js
 //=include lib/svganimations.js
-//=include lib/fm.revealator.jquery.js
 
 //=include lib/css3-animate-it.js
 //=include lib/detect_swipe.js
@@ -120,6 +119,59 @@ $(function () {
 
     });
 /* End author-courses */
+
+
+
+
+/* question-drop */
+$(function () {
+  var  sidebarDrop = $('.question-drop__descr'),
+    sidebarmenuItem = $('.question-drop__block'),
+    sidebarmenuLink = $('.question-drop__title');
+
+  sidebarmenuLink.on("click", function() {
+    sidebarmenuItem.removeClass('active');
+    $(this).closest(sidebarmenuItem).addClass('active');
+    var checkElement = $(this).next();
+      if((checkElement.is(sidebarDrop)) && (checkElement.is(':visible'))) {
+        $(this).closest(sidebarmenuItem).removeClass('active');
+        checkElement.slideUp('normal');
+      }
+      if((checkElement.is(sidebarDrop)) && (!checkElement.is(':visible'))) {
+        $('.question-drop .question-drop__descr:visible').slideUp('normal');
+        checkElement.slideDown('normal');
+      }
+      // if($(this).closest('li').find('ul').children().length == 0) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+
+  });
+});
+
+/* end question-drop */
+
+  function inputChangLevel(){
+    var inputChange = $('.js-question-checkbox__input');
+
+    inputChange.on('change', function() {
+      var _this = $(this);
+
+      var questionText =  _this.closest($('.question-checkbox__label'))
+            .find('.question-checkbox__text')
+            .text();
+      _this.closest($('.question-drop__block'))
+            .find($('.question__gap')).text(questionText);
+    });
+  };
+  inputChangLevel()
+
+
+
+
+
+
 
 
 });
