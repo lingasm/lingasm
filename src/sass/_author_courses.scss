@@ -1,6 +1,75 @@
 .auth-courses  {
   position: relative;
+  padding: 80px 0 0 0;
   &__content {
     padding: 80px 0;
+  }
+}
+
+.author-course {
+  display: flex;
+  &__number {
+    flex: 1 0 150px;
+  }
+  &__descr {
+    flex: 1 0 calc(100% - 150px);
+  }
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    cursor: pointer;
+    &.open {
+      .author-course__icon {
+        svg {
+          transform: rotate(180deg);
+          fill: #464646;
+        }
+      }
+    }
+  }
+  &__title {
+    font-family: "HelveticaNeueRegular";
+    font-size: 38px;
+    margin-bottom: 20px;
+    color: $color-red;
+    line-height: 1;
+  }
+  &__subtitle {
+    font-family: "HelveticaNeueBold";
+    font-size: 20px;
+    text-transform: uppercase;
+  }
+  &__icon {
+    margin: 10px 0 0 20px;
+    svg {
+      font-size: 25px;
+      fill: $color-red;
+      transition: all .4s;
+    }
+  }
+  &__hidden {
+    display: none;
+    padding-left: 50px;
+  }
+  &__text {
+    font-family: "HelveticaNeueLight";
+    font-size: 17px;
+    margin-bottom: 15px;
+  }
+  &__number {
+    font-family: "HelveticaNeueBold";
+    font-size: 18px;
+    color: $color-red;
+  }
+  &__bottom {
+    margin-bottom: 15px;
+  }
+  &__list {
+    margin: 10px 0 0 35px;
+    list-style-type: square;
+    li {
+      font-size: 17px;
+    }
   }
 }

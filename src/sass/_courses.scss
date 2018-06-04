@@ -1,11 +1,14 @@
 .courses {
   position: relative;
   &__content {
-    padding: 80px 0;
+    padding: 80px 0 0 0;
   }
   &__block {
     padding: 30px 0;
-    background-color: rgba(255,255,255,.8);   
+    background-color: rgba(255,255,255,.8);
+    &.lite-opacity {
+      background-color: rgba(255,255,255,.45);
+    }
   }
   &__section {
     // background-color: #7c7c7c;

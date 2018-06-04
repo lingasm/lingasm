@@ -5,7 +5,7 @@ body, html {
   line-height: 1.4;
   overflow-x: hidden;
   -webkit-text-size-adjust: none;
-} 
+}
 
 img {
   max-width: 100%;
@@ -20,6 +20,9 @@ a {
   max-width: 1430px;
   padding: 0 15px;
   margin: 0 auto;
+  &.middle {
+    max-width: 1200px;
+  }
   &.small {
     max-width: 1000px;
   }
@@ -41,7 +44,7 @@ a {
 .title {
   margin-bottom: 35px;
   text-align: center;
-  
+
 }
 
 .logo {
@@ -49,14 +52,10 @@ a {
     display: flex;
     align-items: center;
   }
-  &__img {
-    margin-right: 5px;
-  }
-  &__text {
-    font-family: "SketchBlockBold";
-    font-size: 30px;
-    color: #000;
-  }
+}
+
+.m-r-20 {
+  margin-right: 20px;
 }
 
 .h2 {
@@ -65,29 +64,29 @@ a {
   font-size: 45px;
   display: inline-block;
   font-weight: bold;
-  color: #1ab798;
+  color: #000;
   text-transform: uppercase;
   text-shadow: 1px 1px 2px black;
-  &:before {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 1px;
-    background: #babdc1;
-    left: -72px;
-    top: 50%;
-    transform: translateY(-50%);
-  }  
-  &:after {
-    content: '';
-    position: absolute;
-    width: 60px;
-    height: 1px;
-    background: #babdc1;
-    right: -72px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+  // &:before {
+  //   content: '';
+  //   position: absolute;
+  //   width: 60px;
+  //   height: 1px;
+  //   background: #babdc1;
+  //   left: -72px;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  // }
+  // &:after {
+  //   content: '';
+  //   position: absolute;
+  //   width: 60px;
+  //   height: 1px;
+  //   background: #babdc1;
+  //   right: -72px;
+  //   top: 50%;
+  //   transform: translateY(-50%);
+  // }
 }
 
 .s-line {
@@ -101,8 +100,8 @@ a {
     display: inline-block;
     width: 78px;
     height: 2px;
-    background: #343c3f;
-  }  
+    background: $color-grey;
+  }
   &__left {
     margin-right: 2px;
     &:after {
@@ -111,10 +110,10 @@ a {
       width: 11px;
       height: 2px;
       transform: rotate(122deg);
-      background: #343c3f;
+      background: $color-grey;
       right: -7px;
       top: -4px;
-    }  
+    }
   }
   &__right {
     margin-left: 2px;
@@ -124,11 +123,11 @@ a {
       width: 11px;
       height: 2px;
       transform: rotate(122deg);
-      background: #343c3f;
+      background: $color-grey;
       left: -7px;
       top: 4px;
-    }  
-  }    
+    }
+  }
 }
 
 .vertical-line {
@@ -142,9 +141,8 @@ a {
   bottom: 0;
   left:0;
   width: 100%;
-  height: 3px;
+  height: 1px;
   margin-bottom: 0px;
-  overflow: hidden;
   background-color: transparent;
   z-index: 1500;
 }
@@ -155,7 +153,8 @@ a {
   height: 100%;
   z-index:99;
   max-width: 100%;
-  background-color: #fc3865;
+  background-color: $color-red;
+  box-shadow: 0 2px 7px $color-red;
   transition: width .6s ease;
 }
 
@@ -212,11 +211,10 @@ a {
 }
 
 .s-price {
+  list-style-type: disc;
   &__text {
-
-  }
-  &__span {
-    font-weight: bold;
+    font-size: 15px;
+    font-weight: 600;
   }
 }
 
@@ -229,4 +227,23 @@ a {
   top: -50px;
   width: 100%;
   height: 1px;
+}
+
+.social {
+  display: flex;
+  margin-left: 60px;
+  &-itm {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px;
+    transition: all .4s;
+    &:hover {
+      transform: rotate(360deg) scale(1.2);
+    }
+    &__link {
+      display: flex;
+      width: 40px;
+      height: 40px;
+    }
+  }
 }
