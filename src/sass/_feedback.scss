@@ -6,11 +6,6 @@
     position: relative;
     display: flex;
     z-index: 150;
-<<<<<<< HEAD
-  }
-  &-form {
-    width: 550px;
-=======
     @media screen and (max-width: 1100px) {
       flex-direction: column-reverse;
     }
@@ -68,6 +63,5 @@
         width: 100%;
       }
     }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
 }

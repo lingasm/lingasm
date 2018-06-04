@@ -1,16 +1,6 @@
 .services  {
   position: relative;
   background-color: #f8f8f8;
-<<<<<<< HEAD
-  background-image: url(../img/bg4.jpg);
-  background-repeat: no-repeat;
-  background-position: 50% 50%;
-  background-size: cover;
-  &__content {
-    padding: 80px 35px;
-    // overflow: hidden;
-    // background-color: rgba(255,255,255,.9);
-=======
   &__content {
     padding: 80px 35px;
     @media screen and (max-width: 1366px) {
@@ -19,18 +9,12 @@
     @media screen and (max-width: 768px) {
       padding: 50px 10px;
     }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__descr {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding-top: 45px;
-<<<<<<< HEAD
-    &-left {
-      position: relative;
-      width: 45%;
-=======
     @media screen and (max-width: 700px) {
       flex-direction: column;
     }
@@ -43,7 +27,6 @@
       @media screen and (max-width: 700px) {
         width: 100%;
       }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
       .stars-grid {
         transform: rotate(90deg);
         top: -80px;
@@ -53,15 +36,12 @@
     &-right {
       position: relative;
       width: 45%;
-<<<<<<< HEAD
-=======
       @media screen and (max-width: 768px) {
         width: 48%;
       }
       @media screen and (max-width: 700px) {
         width: 100%;
       }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
       .services-item {
         margin-top: 65px;
       }
@@ -76,12 +56,6 @@
 
 .services-item {
   position: relative;
-<<<<<<< HEAD
-  padding: 30px 35px 45px 35px;
-  background-color: #fff;
-  margin-bottom: 65px;
-  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.4);
-=======
   margin-bottom: 65px;
   &__content {
     padding: 30px 35px 45px 35px;
@@ -91,7 +65,6 @@
       padding: 30px 20px 45px 20px;
     }
   }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   &__index {
     font-family: "HelveticaNeueBold";
     font-size: 30px;
@@ -106,10 +79,7 @@
   }
   &__title {
     font-size: 24px;
-<<<<<<< HEAD
-=======
     @include css-lock(18,24,320,1920);
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
     text-transform: uppercase;
   }
   &__descr {
@@ -118,11 +88,6 @@
   &__text {
     font-family: "HelveticaNeueLight";
     font-size: 17px;
-<<<<<<< HEAD
-  }
-  &__price {
-    margin: 20px 0 0 50px;
-=======
     @media screen and (max-width: 550px) {
       font-size: 16px;
     }
@@ -132,7 +97,6 @@
     @media screen and (max-width: 380px) {
       margin: 20px 0 0 20px;
     }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__icon {
     position: absolute;

@@ -3890,22 +3890,6 @@ $(document).ready(function () {
         window.location.hash = hash;
         $(document).on("scroll", onScroll);
       });
-<<<<<<< HEAD
-    });
-  });
-
-  /* End active menu */
-  var authorCourseTop = $('.author-course__top'),
-      authorCourseDescr = $('.author-course__descr'),
-      authorCourseHidden = $('.author-course__hidden');
-
-  authorCourseTop.on("click", function () {
-    var _this = $(this);
-    _this.toggleClass('open');
-    _this.closest(authorCourseDescr).find(authorCourseHidden).slideToggle();
-  });
-  /* End author-courses */
-=======
     });
   });
 
@@ -3960,7 +3944,6 @@ $(document).ready(function () {
     });
   };
   inputChangLevel();
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 });
 
 $(window).on('load', function () {

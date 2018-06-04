@@ -5,12 +5,9 @@
 //=include lib/classie.js
 //=include lib/svganimations.js
 
-<<<<<<< HEAD
-=======
 //=include lib/css3-animate-it.js
 //=include lib/detect_swipe.js
 
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 $(document).ready(function () {
 
 /* active menu */
@@ -25,11 +22,6 @@ $(document).ready(function () {
     return false;
   }
 
-<<<<<<< HEAD
-
-
-  function navbarResponsive() {  
-=======
   $('.wrapper-bg').on('click', function(e) {
     var _self = $(this),
         togglesHidden = $('.topline__right'),
@@ -65,7 +57,6 @@ $(document).ready(function () {
 
 
   function navbarResponsive() {
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
     var toggles = $('.navbar-responsive__btn'),
         wrapperBg = $('.wrapper-bg'),
         togglesHidden = $('.topline__right');
@@ -83,11 +74,7 @@ $(document).ready(function () {
   navbarResponsive();
 
 $(function () {
-<<<<<<< HEAD
-  var menu_selector = ".main-nav"; 
-=======
   var menu_selector = ".main-nav";
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
     function onScroll(){
       var scroll_top = $(document).scrollTop();
       $(menu_selector + " a").each(function(){
@@ -129,12 +116,6 @@ $(function () {
       var _this = $(this);
       _this.toggleClass('open');
       _this.closest(authorCourseDescr).find(authorCourseHidden).slideToggle();
-<<<<<<< HEAD
-      
-    });
-/* End author-courses */
-
-=======
 
     });
 /* End author-courses */
@@ -192,7 +173,6 @@ $(function () {
 
 
 
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 
 });
 

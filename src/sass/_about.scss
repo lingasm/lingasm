@@ -93,12 +93,9 @@
   }
   &__icon {
     flex: 1 0 45px;
-<<<<<<< HEAD
-=======
     @media screen and (max-width: 450px) {
       flex: 1 0 35px;
     }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
     &.top {
       margin-top: -30px;
     }

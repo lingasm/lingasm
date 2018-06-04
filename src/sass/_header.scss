@@ -218,9 +218,6 @@
 }
 
 .map {
-<<<<<<< HEAD
-  width: 100%;
-=======
   display: flex;
   justify-content: center;
   width: 100%;
@@ -277,7 +274,6 @@
       width: 40%;
     }
   }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 }
 
 /* Animate scroll-down*/
@@ -465,8 +461,6 @@ $animDuration: 5s;
   90% { color: $colorOutline; }
 }
 /* end scroll-down */
-<<<<<<< HEAD
-=======
 
 .map-svg {
   // transition: fill .4s ease;
@@ -510,4 +504,3 @@ $animDuration: 5s;
   100% {  opacity: 1!important; transform: scale(1); }
 }
 
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea

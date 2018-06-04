@@ -3,15 +3,12 @@
 	padding: 50px;
 	background-color: #fff;
 	box-shadow: 0 0 20px 0 rgba(0,0,0,.4);
-<<<<<<< HEAD
-=======
 	@media screen and (max-width: 768px) {
     padding: 50px 35px;
   }
   @media screen and (max-width: 550px) {
     padding: 50px 20px;
   }
->>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 	&__inner {
 		display: flex;
 		justify-content: space-between;
