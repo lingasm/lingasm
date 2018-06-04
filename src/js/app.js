@@ -3,41 +3,91 @@
 //=include lib/jquery.min.js
 //=include lib/slick.min.js
 //=include lib/classie.js
-//=include lib/fm.revealator.jquery.js
+//=include lib/svganimations.js
 
+<<<<<<< HEAD
+=======
+//=include lib/css3-animate-it.js
+//=include lib/detect_swipe.js
+
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 $(document).ready(function () {
 
 /* active menu */
 
  $(document).on('click', '.anchorJS', scrollNav )
 
-  function scrollNav() {
+  function scrollNav(e) {
+    e.preventDefault();
     $('html, body').animate({
         scrollTop: ($( $(this).data('href') ).offset().top - 40)
     }, 1000);
     return false;
   }
 
+<<<<<<< HEAD
 
 
   function navbarResponsive() {  
+=======
+  $('.wrapper-bg').on('click', function(e) {
+    var _self = $(this),
+        togglesHidden = $('.topline__right'),
+        contentOut = $('.content-out');
+    if (!$(e.target).closest($('.topline')).length){
+      _self.fadeToggle();
+      _self.closest(contentOut).find(togglesHidden).toggleClass('open');
+      _self.closest(contentOut).find('.navbar-responsive__btn').removeClass('active');
+      _self.closest('body').toggleClass('no-scroll');
+    }
+  });
+
+  $('.anchorJS').on('click', function(e) {
+    var _self = $(this),
+        togglesHidden = $('.topline__right'),
+        contentOut = $('.content-out'),
+        wrapperBg = $('.wrapper-bg');
+    _self.closest(contentOut).find(togglesHidden).removeClass('open');
+    _self.closest(contentOut).find('.navbar-responsive__btn').removeClass('active');
+    _self.closest('.content-out').find(wrapperBg).fadeOut();
+    _self.closest('body').removeClass('no-scroll');
+
+  });
+
+  $(".js-nav-swipe").on('swiperight',  function() {
+    var _self = $(this),
+    wrapperBg = $('.wrapper-bg');
+    _self.removeClass('open');
+    _self.closest('.topline').find('.navbar-responsive__btn').removeClass('active');
+    _self.closest('.content-out').find(wrapperBg).fadeToggle();
+    _self.closest('body').toggleClass('no-scroll');
+  })
+
+
+  function navbarResponsive() {
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
     var toggles = $('.navbar-responsive__btn'),
         wrapperBg = $('.wrapper-bg'),
         togglesHidden = $('.topline__right');
 
-    toggles.on("click", function (){      
+    toggles.on("click", function (){
       $(this).toggleClass('active');
       $(this).closest('.topline').find(togglesHidden).toggleClass('open');
       $(this).closest('.content-out').find(wrapperBg).fadeToggle();
+      $(this).closest('body').toggleClass('no-scroll');
     });
     toggles.mouseup(function(){
       return false;
-    });     
+    });
   };
   navbarResponsive();
 
 $(function () {
+<<<<<<< HEAD
   var menu_selector = ".main-nav"; 
+=======
+  var menu_selector = ".main-nav";
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
     function onScroll(){
       var scroll_top = $(document).scrollTop();
       $(menu_selector + " a").each(function(){
@@ -79,12 +129,72 @@ $(function () {
       var _this = $(this);
       _this.toggleClass('open');
       _this.closest(authorCourseDescr).find(authorCourseHidden).slideToggle();
+<<<<<<< HEAD
       
     });
 /* End author-courses */
 
+=======
 
-});	
+    });
+/* End author-courses */
+
+
+
+
+/* question-drop */
+$(function () {
+  var  sidebarDrop = $('.question-drop__descr'),
+    sidebarmenuItem = $('.question-drop__block'),
+    sidebarmenuLink = $('.question-drop__title');
+
+  sidebarmenuLink.on("click", function() {
+    sidebarmenuItem.removeClass('active');
+    $(this).closest(sidebarmenuItem).addClass('active');
+    var checkElement = $(this).next();
+      if((checkElement.is(sidebarDrop)) && (checkElement.is(':visible'))) {
+        $(this).closest(sidebarmenuItem).removeClass('active');
+        checkElement.slideUp('normal');
+      }
+      if((checkElement.is(sidebarDrop)) && (!checkElement.is(':visible'))) {
+        $('.question-drop .question-drop__descr:visible').slideUp('normal');
+        checkElement.slideDown('normal');
+      }
+      // if($(this).closest('li').find('ul').children().length == 0) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+
+  });
+});
+
+/* end question-drop */
+
+  function inputChangLevel(){
+    var inputChange = $('.js-question-checkbox__input');
+
+    inputChange.on('change', function() {
+      var _this = $(this);
+
+      var questionText =  _this.closest($('.question-checkbox__label'))
+            .find('.question-checkbox__text')
+            .text();
+      _this.closest($('.question-drop__block'))
+            .find($('.question__gap')).text(questionText);
+    });
+  };
+  inputChangLevel()
+
+
+
+
+
+
+
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
+
+});
 
 $(window).on('load', function(){
   $(window).scroll(function() {

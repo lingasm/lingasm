@@ -1,6 +1,15 @@
 .my-level {
   &__content {
     padding: 80px 35px;
+<<<<<<< HEAD
+=======
+    @media screen and (max-width: 768px) {
+      padding: 50px 35px;
+    }
+    @media screen and (max-width: 550px) {
+      padding: 50px 0px;
+    }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__block {
     padding-top: 45px;
@@ -8,18 +17,61 @@
 }
 
 .levels {
+<<<<<<< HEAD
+=======
+  position: relative;
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   max-width: 950px;
   margin: 0 auto;
   padding: 50px;
   background-color: #fff;
   box-shadow: 0 0 20px 0 rgba(0,0,0,.4);
+<<<<<<< HEAD
   &__descr {
     display: flex;
     align-items: center;
+=======
+  @media screen and (max-width: 992px) {
+    padding: 50px 20px;
+  }
+  @media screen and (max-width: 550px) {
+    padding: 40px 10px;
+  }
+  .stars-grid {
+    top: 50%;
+
+    &.left {
+      left: 0;
+      transform: translate(-100%,-50%);
+    }
+    &.right {
+      right: 0;
+      transform: translate(100%,-50%);
+    }
+  }
+  &__descr {
+    display: flex;
+    align-items: center;
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+    }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__left {
     width: 40%;
     padding-right: 60px;
+<<<<<<< HEAD
+=======
+    @media screen and (max-width: 992px) {
+      padding-right: 35px;
+    }
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      max-width: 320px;
+      padding-right: 0;
+      margin-bottom: 20px;
+    }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__right {
     display: flex;
@@ -28,17 +80,44 @@
     padding: 50px;
     background-color: #f6f6f6;
     width: 60%;
+<<<<<<< HEAD
+=======
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+    @media screen and (max-width: 550px) {
+      padding: 30px 20px;
+    }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__title {
     font-size: 18px;
     margin-bottom: 25px;
+<<<<<<< HEAD
     color: #afafaf;
+=======
+    color: #000;
+    @media screen and (max-width: 767px) {
+      text-align: center;
+    }
+    .bold {
+      font-weight: bold;
+      color: #000;
+    }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__bottom {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 30px;
+<<<<<<< HEAD
+=======
+    flex-wrap: wrap;
+    @media screen and (max-width: 550px) {
+      flex-direction: column;
+    }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
   }
   &__btn {
     margin: 0 10px;
@@ -52,6 +131,51 @@
     padding: 5px;
     background-color: #fff;
   }
+<<<<<<< HEAD
+=======
+  &__gap {
+    min-width: 45px;
+    display: inline-block;
+    border-bottom: 1px solid #000;
+    &.big {
+      min-width: 80px;
+    }
+  }
+  &-drop {
+    width: 100%;
+    &__row {
+      margin-bottom: 10px;
+      padding: 5px;
+      background-color: #fff;
+    }
+    &__descr {
+      display: none;
+      &.first {
+        display: block;
+      }
+    }
+    &__block {
+      &.active {
+        .drop-caret {
+          transform: rotate(180deg);
+          color: #000;
+        }
+      }
+    }
+    &__title {
+      position: relative;
+      font-size: 16px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      .drop-caret {
+        position: absolute;
+        top: 8px;
+        left: -15px;
+        color: $color-red;
+      }
+    }
+  }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 }
 
 .question-checkbox {
@@ -63,10 +187,17 @@
     margin-bottom: 0;
     .question-checkbox__input:checked {
       & + .question-checkbox__svg {
+<<<<<<< HEAD
         border-color: #20C2E0;
         svg {
           path {
             fill: #20C2E0;
+=======
+        border-color: $color-red;
+        svg {
+          path {
+            fill: $color-red;
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
           }
           polyline {
             stroke-dashoffset: 0
@@ -96,7 +227,11 @@
         left: -2px;
         path {
           fill: none;
+<<<<<<< HEAD
           stroke: #20C2E0;
+=======
+          stroke: $color-red;
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
           stroke-width: 2;
           stroke-linecap: round;
           stroke-linejoin: round;

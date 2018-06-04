@@ -2755,127 +2755,1044 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 })(window);
 
-/*
- Revealator jQuery Plugin
- Revealator is a jQuery-based plugin for adding effects to elements that enter the window. It's simple, and easy to use.
- version 1.4, Jan 11th, 2016
- by Ingi P. Jacobsen
-
- The MIT License (MIT)
-
- Copyright (c) 2016 Qodio
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included in all
- copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+/**
+ * svganimations.js v1.0.0
+ * http://www.codrops.com
+ *
+ * the svg path animation is based on http://24ways.org/2013/animating-vectors-with-svg/ by Brian Suda (@briansuda)
+ *
+ * Licensed under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ *
+ * Copyright 2013, Codrops
+ * http://www.codrops.com
  */
+(function () {
 
-var Revealator = typeof Revealator !== 'undefined' ? Revealator : {};
+  'use strict';
 
-$(function () {
-  Revealator = $.extend({}, {
-    timer: null,
-    busy: false,
-    scroll_padding: 0,
-    effects_padding: 0,
-    refresh: function refresh() {}
-  }, typeof Revealator !== 'undefined' ? Revealator : {});
+  var docElem = window.document.documentElement;
 
-  Revealator.refresh = function () {
-    var $window = $(window);
-    var $document = $(document);
-    var $body = $(document.body);
-    var i = 0;
-    var window_top = Revealator.effects_padding;
-    var window_bottom = $window.height() - Revealator.effects_padding;
-    var document_top = Revealator.scroll_padding;
-    var document_bottom = $document.height() - Revealator.scroll_padding;
+  window.requestAnimFrame = function () {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function ( /* function */callback) {
+      window.setTimeout(callback, 1000 / 60);
+    };
+  }();
 
-    if ($window.scrollTop() === 0) {
-      if (!$body.hasClass('at-top')) {
-        $body.addClass('at-top').removeClass('at-bottom').removeClass('near-top').removeClass('near-bottom');
-      }
-    } else if ($window.scrollTop() + $window.height() === $document.height()) {
-      if (!$body.hasClass('at-bottom')) {
-        $body.addClass('at-bottom').removeClass('at-top').removeClass('near-top').removeClass('near-bottom');
-      }
-    } else if ($window.scrollTop() <= document_top) {
-      if (!$body.hasClass('near-top')) {
-        $body.addClass('near-top').removeClass('near-bottom').removeClass('at-top').removeClass('at-bottom');
-      }
-    } else if ($window.scrollTop() + $window.height() >= document_bottom) {
-      if (!$body.hasClass('near-bottom')) {
-        $body.addClass('near-bottom').removeClass('near-top').removeClass('at-top').removeClass('at-bottom');
-      }
-    } else {
-      if ($body.hasClass('at-top') || $body.hasClass('at-bottom') || $body.hasClass('near-top') || $body.hasClass('near-bottom')) {
-        $body.removeClass('at-top').removeClass('at-bottom').removeClass('near-top').removeClass('near-bottom');
-      }
-    }
+  window.cancelAnimFrame = function () {
+    return window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || function (id) {
+      window.clearTimeout(id);
+    };
+  }();
 
-    $('*[class*="revealator"]').each(function () {
-      i++;
-      var element = this;
-      var $element = $(element);
-      var element_bounding = element.getBoundingClientRect();
+  function SVGEl(el) {
+    this.el = el;
+    this.image = this.el.previousElementSibling;
+    this.current_frame = 0;
+    this.total_frames = 60;
+    this.path = new Array();
+    this.length = new Array();
+    this.handle = 0;
+    this.init();
+  }
 
-      var position_class = undefined;
-      if (element_bounding.top > window_bottom && element_bounding.bottom > window_bottom) {
-        position_class = 'revealator-below';
-      } else if (element_bounding.top < window_bottom && element_bounding.bottom > window_bottom) {
-        position_class = 'revealator-partially-below';
-      } else if (element_bounding.top < window_top && element_bounding.bottom > window_top) {
-        position_class = 'revealator-partially-above';
-      } else if (element_bounding.top < window_top && element_bounding.bottom < window_top) {
-        position_class = 'revealator-above';
-      } else {
-        position_class = 'revealator-within';
-      }
-
-      if ($element.hasClass('revealator-load') && !$element.hasClass('revealator-within')) {
-        $element.removeClass('revealator-below revealator-partially-below revealator-within revealator-partially-above revealator-above');
-        $element.addClass('revealator-within');
-      }
-
-      if (!$element.hasClass(position_class) && !$element.hasClass('revealator-load')) {
-        if ($element.hasClass('revealator-once')) {
-          if (!$element.hasClass('revealator-within')) {
-            $element.removeClass('revealator-below revealator-partially-below revealator-within revealator-partially-above revealator-above');
-            $element.addClass(position_class);
-          }
-          if ($element.hasClass('revealator-partially-above') || $element.hasClass('revealator-above')) {
-            $element.addClass('revealator-within');
-          }
-        } else {
-          $element.removeClass('revealator-below revealator-partially-below revealator-within revealator-partially-above revealator-above');
-          $element.addClass(position_class);
-        }
-      }
+  SVGEl.prototype.init = function () {
+    var self = this;
+    [].slice.call(this.el.querySelectorAll('path')).forEach(function (path, i) {
+      self.path[i] = path;
+      var l = self.path[i].getTotalLength();
+      self.length[i] = l;
+      self.path[i].style.strokeDasharray = l + ' ' + l;
+      self.path[i].style.strokeDashoffset = l;
     });
   };
 
-  $(window).bind('scroll resize load ready', function () {
-    if (!Revealator.busy) {
-      Revealator.busy = true;
-      setTimeout(function () {
-        Revealator.busy = false;
-        Revealator.refresh();
-      }, 150);
+  SVGEl.prototype.render = function () {
+    if (this.rendered) return;
+    this.rendered = true;
+    this.draw();
+  };
+
+  SVGEl.prototype.draw = function () {
+    var self = this,
+        progress = this.current_frame / this.total_frames;
+    if (progress > 1) {
+      window.cancelAnimFrame(this.handle);
+      this.showImage();
+    } else {
+      this.current_frame++;
+      for (var j = 0, len = this.path.length; j < len; j++) {
+        this.path[j].style.strokeDashoffset = Math.floor(this.length[j] * (1 - progress));
+      }
+      this.handle = window.requestAnimFrame(function () {
+        self.draw();
+      });
     }
+  };
+
+  SVGEl.prototype.showImage = function () {
+    classie.add(this.image, 'hide');
+    classie.add(this.el, 'show');
+  };
+
+  function getViewportH() {
+    var client = docElem['clientHeight'],
+        inner = window['innerHeight'];
+
+    if (client < inner) return inner;else return client;
+  }
+
+  function scrollY() {
+    return window.pageYOffset || docElem.scrollTop;
+  }
+
+  // http://stackoverflow.com/a/5598797/989439
+  function getOffset(el) {
+    var offsetTop = 0,
+        offsetLeft = 0;
+    do {
+      if (!isNaN(el.offsetTop)) {
+        offsetTop += el.offsetTop;
+      }
+      if (!isNaN(el.offsetLeft)) {
+        offsetLeft += el.offsetLeft;
+      }
+    } while (el = el.offsetParent);
+
+    return {
+      top: offsetTop,
+      left: offsetLeft
+    };
+  }
+
+  function inViewport(el, h) {
+    var elH = el.offsetHeight,
+        scrolled = scrollY(),
+        viewed = scrolled + getViewportH(),
+        elTop = getOffset(el).top,
+        elBottom = elTop + elH,
+
+    // if 0, the element is considered in the viewport as soon as it enters.
+    // if 1, the element is considered in the viewport only when it's fully inside
+    // value in percentage (1 >= h >= 0)
+    h = h || 0;
+
+    return elTop + elH * h <= viewed && elBottom >= scrolled;
+  }
+
+  function init() {
+    var svgs = Array.prototype.slice.call(document.querySelectorAll('#main svg')),
+        svgArr = new Array(),
+        didScroll = false,
+        resizeTimeout;
+
+    // the svgs already shown...
+    svgs.forEach(function (el, i) {
+      var svg = new SVGEl(el);
+      svgArr[i] = svg;
+      setTimeout(function (el) {
+        return function () {
+          if (inViewport(el.parentNode)) {
+            svg.render();
+          }
+        };
+      }(el), 250);
+    });
+
+    var scrollHandler = function scrollHandler() {
+      if (!didScroll) {
+        didScroll = true;
+        setTimeout(function () {
+          scrollPage();
+        }, 60);
+      }
+    },
+        scrollPage = function scrollPage() {
+      svgs.forEach(function (el, i) {
+        if (inViewport(el.parentNode, 0.5)) {
+          svgArr[i].render();
+        }
+      });
+      didScroll = false;
+    },
+        resizeHandler = function resizeHandler() {
+      function delayed() {
+        scrollPage();
+        resizeTimeout = null;
+      }
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = setTimeout(delayed, 200);
+    };
+
+    window.addEventListener('scroll', scrollHandler, false);
+    window.addEventListener('resize', resizeHandler, false);
+  }
+
+  init();
+})();
+
+/*
+
+ * CSS3 Animate it
+
+ * Copyright (c) 2014 Jack McCourt
+
+ * https://github.com/kriegar/css3-animate-it
+
+ * Version: 0.1.0
+
+ * 
+
+ * I utilise the jQuery.appear plugin within this javascript file so here is a link to that too
+
+ * https://github.com/morr/jquery.appear
+
+ *
+
+ * I also utilise the jQuery.doTimeout plugin for the data-sequence functionality so here is a link back to them.
+
+ * http://benalman.com/projects/jquery-dotimeout-plugin/
+
+ */
+
+(function ($) {
+
+  var selectors = [];
+
+  var check_binded = false;
+
+  var check_lock = false;
+
+  var defaults = {
+
+    interval: 250,
+
+    force_process: false
+
+  };
+
+  var $window = $(window);
+
+  var $prior_appeared;
+
+  function process() {
+
+    check_lock = false;
+
+    for (var index = 0; index < selectors.length; index++) {
+
+      var $appeared = $(selectors[index]).filter(function () {
+
+        return $(this).is(':appeared');
+      });
+
+      $appeared.trigger('appear', [$appeared]);
+
+      if ($prior_appeared) {
+
+        var $disappeared = $prior_appeared.not($appeared);
+
+        $disappeared.trigger('disappear', [$disappeared]);
+      }
+
+      $prior_appeared = $appeared;
+    }
+  }
+
+  // "appeared" custom filter
+
+  $.expr[':']['appeared'] = function (element) {
+
+    var $element = $(element);
+
+    if (!$element.is(':visible')) {
+
+      return false;
+    }
+
+    var window_left = $window.scrollLeft();
+
+    var window_top = $window.scrollTop();
+
+    var offset = $element.offset();
+
+    var left = offset.left;
+
+    var top = offset.top;
+
+    if (top + $element.height() >= window_top && top - ($element.data('appear-top-offset') || 0) <= window_top + $window.height() && left + $element.width() >= window_left && left - ($element.data('appear-left-offset') || 0) <= window_left + $window.width()) {
+
+      return true;
+    } else {
+
+      return false;
+    }
+  };
+
+  $.fn.extend({
+
+    // watching for element's appearance in browser viewport
+
+    appear: function appear(options) {
+
+      var opts = $.extend({}, defaults, options || {});
+
+      var selector = this.selector || this;
+
+      if (!check_binded) {
+
+        var on_check = function on_check() {
+
+          if (check_lock) {
+
+            return;
+          }
+
+          check_lock = true;
+
+          setTimeout(process, opts.interval);
+        };
+
+        $(window).scroll(on_check).resize(on_check);
+
+        check_binded = true;
+      }
+
+      if (opts.force_process) {
+
+        setTimeout(process, opts.interval);
+      }
+
+      selectors.push(selector);
+
+      return $(selector);
+    }
+
+  });
+
+  $.extend({
+
+    // force elements's appearance check
+
+    force_appear: function force_appear() {
+
+      if (check_binded) {
+
+        process();
+
+        return true;
+      };
+
+      return false;
+    }
+
+  });
+})(jQuery);
+
+/*!
+
+ * jQuery doTimeout: Like setTimeout, but better! - v1.0 - 3/3/2010
+
+ * http://benalman.com/projects/jquery-dotimeout-plugin/
+
+ * 
+
+ * Copyright (c) 2010 "Cowboy" Ben Alman
+
+ * Dual licensed under the MIT and GPL licenses.
+
+ * http://benalman.com/about/license/
+
+ */
+
+// Script: jQuery doTimeout: Like setTimeout, but better!
+
+//
+
+// *Version: 1.0, Last updated: 3/3/2010*
+
+// 
+
+// Project Home - http://benalman.com/projects/jquery-dotimeout-plugin/
+
+// GitHub       - http://github.com/cowboy/jquery-dotimeout/
+
+// Source       - http://github.com/cowboy/jquery-dotimeout/raw/master/jquery.ba-dotimeout.js
+
+// (Minified)   - http://github.com/cowboy/jquery-dotimeout/raw/master/jquery.ba-dotimeout.min.js (1.0kb)
+
+// 
+
+// About: License
+
+// 
+
+// Copyright (c) 2010 "Cowboy" Ben Alman,
+
+// Dual licensed under the MIT and GPL licenses.
+
+// http://benalman.com/about/license/
+
+// 
+
+// About: Examples
+
+// 
+
+// These working examples, complete with fully commented code, illustrate a few
+
+// ways in which this plugin can be used.
+
+// 
+
+// Debouncing      - http://benalman.com/code/projects/jquery-dotimeout/examples/debouncing/
+
+// Delays, Polling - http://benalman.com/code/projects/jquery-dotimeout/examples/delay-poll/
+
+// Hover Intent    - http://benalman.com/code/projects/jquery-dotimeout/examples/hoverintent/
+
+// 
+
+// About: Support and Testing
+
+// 
+
+// Information about what version or versions of jQuery this plugin has been
+
+// tested with, what browsers it has been tested in, and where the unit tests
+
+// reside (so you can test it yourself).
+
+// 
+
+// jQuery Versions - 1.3.2, 1.4.2
+
+// Browsers Tested - Internet Explorer 6-8, Firefox 2-3.6, Safari 3-4, Chrome 4-5, Opera 9.6-10.1.
+
+// Unit Tests      - http://benalman.com/code/projects/jquery-dotimeout/unit/
+
+// 
+
+// About: Release History
+
+// 
+
+// 1.0 - (3/3/2010) Callback can now be a string, in which case it will call
+
+//       the appropriate $.method or $.fn.method, depending on where .doTimeout
+
+//       was called. Callback must now return `true` (not just a truthy value)
+
+//       to poll.
+
+// 0.4 - (7/15/2009) Made the "id" argument optional, some other minor tweaks
+
+// 0.3 - (6/25/2009) Initial release
+
+
+(function ($) {
+
+  '$:nomunge'; // Used by YUI compressor.
+
+
+  var cache = {},
+
+
+  // Reused internal string.
+
+  doTimeout = 'doTimeout',
+
+
+  // A convenient shortcut.
+
+  aps = Array.prototype.slice;
+
+  // Method: jQuery.doTimeout
+
+  // 
+
+  // Initialize, cancel, or force execution of a callback after a delay.
+
+  // 
+
+  // If delay and callback are specified, a doTimeout is initialized. The
+
+  // callback will execute, asynchronously, after the delay. If an id is
+
+  // specified, this doTimeout will override and cancel any existing doTimeout
+
+  // with the same id. Any additional arguments will be passed into callback
+
+  // when it is executed.
+
+  // 
+
+  // If the callback returns true, the doTimeout loop will execute again, after
+
+  // the delay, creating a polling loop until the callback returns a non-true
+
+  // value.
+
+  // 
+
+  // Note that if an id is not passed as the first argument, this doTimeout will
+
+  // NOT be able to be manually canceled or forced. (for debouncing, be sure to
+
+  // specify an id).
+
+  // 
+
+  // If id is specified, but delay and callback are not, the doTimeout will be
+
+  // canceled without executing the callback. If force_mode is specified, the
+
+  // callback will be executed, synchronously, but will only be allowed to
+
+  // continue a polling loop if force_mode is true (provided the callback
+
+  // returns true, of course). If force_mode is false, no polling loop will
+
+  // continue, even if the callback returns true.
+
+  // 
+
+  // Usage:
+
+  // 
+
+  // > jQuery.doTimeout( [ id, ] delay, callback [, arg ... ] );
+
+  // > jQuery.doTimeout( id [, force_mode ] );
+
+  // 
+
+  // Arguments:
+
+  // 
+
+  //  id - (String) An optional unique identifier for this doTimeout. If id is
+
+  //    not specified, the doTimeout will NOT be able to be manually canceled or
+
+  //    forced.
+
+  //  delay - (Number) A zero-or-greater delay in milliseconds after which
+
+  //    callback will be executed. 
+
+  //  callback - (Function) A function to be executed after delay milliseconds.
+
+  //  callback - (String) A jQuery method to be executed after delay
+
+  //    milliseconds. This method will only poll if it explicitly returns
+
+  //    true.
+
+  //  force_mode - (Boolean) If true, execute that id's doTimeout callback
+
+  //    immediately and synchronously, continuing any callback return-true
+
+  //    polling loop. If false, execute the callback immediately and
+
+  //    synchronously but do NOT continue a callback return-true polling loop.
+
+  //    If omitted, cancel that id's doTimeout.
+
+  // 
+
+  // Returns:
+
+  // 
+
+  //  If force_mode is true, false or undefined and there is a
+
+  //  yet-to-be-executed callback to cancel, true is returned, but if no
+
+  //  callback remains to be executed, undefined is returned.
+
+
+  $[doTimeout] = function () {
+
+    return p_doTimeout.apply(window, [0].concat(aps.call(arguments)));
+  };
+
+  // Method: jQuery.fn.doTimeout
+
+  // 
+
+  // Initialize, cancel, or force execution of a callback after a delay.
+
+  // Operates like <jQuery.doTimeout>, but the passed callback executes in the
+
+  // context of the jQuery collection of elements, and the id is stored as data
+
+  // on the first element in that collection.
+
+  // 
+
+  // If delay and callback are specified, a doTimeout is initialized. The
+
+  // callback will execute, asynchronously, after the delay. If an id is
+
+  // specified, this doTimeout will override and cancel any existing doTimeout
+
+  // with the same id. Any additional arguments will be passed into callback
+
+  // when it is executed.
+
+  // 
+
+  // If the callback returns true, the doTimeout loop will execute again, after
+
+  // the delay, creating a polling loop until the callback returns a non-true
+
+  // value.
+
+  // 
+
+  // Note that if an id is not passed as the first argument, this doTimeout will
+
+  // NOT be able to be manually canceled or forced (for debouncing, be sure to
+
+  // specify an id).
+
+  // 
+
+  // If id is specified, but delay and callback are not, the doTimeout will be
+
+  // canceled without executing the callback. If force_mode is specified, the
+
+  // callback will be executed, synchronously, but will only be allowed to
+
+  // continue a polling loop if force_mode is true (provided the callback
+
+  // returns true, of course). If force_mode is false, no polling loop will
+
+  // continue, even if the callback returns true.
+
+  // 
+
+  // Usage:
+
+  // 
+
+  // > jQuery('selector').doTimeout( [ id, ] delay, callback [, arg ... ] );
+
+  // > jQuery('selector').doTimeout( id [, force_mode ] );
+
+  // 
+
+  // Arguments:
+
+  // 
+
+  //  id - (String) An optional unique identifier for this doTimeout, stored as
+
+  //    jQuery data on the element. If id is not specified, the doTimeout will
+
+  //    NOT be able to be manually canceled or forced.
+
+  //  delay - (Number) A zero-or-greater delay in milliseconds after which
+
+  //    callback will be executed. 
+
+  //  callback - (Function) A function to be executed after delay milliseconds.
+
+  //  callback - (String) A jQuery.fn method to be executed after delay
+
+  //    milliseconds. This method will only poll if it explicitly returns
+
+  //    true (most jQuery.fn methods return a jQuery object, and not `true`,
+
+  //    which allows them to be chained and prevents polling).
+
+  //  force_mode - (Boolean) If true, execute that id's doTimeout callback
+
+  //    immediately and synchronously, continuing any callback return-true
+
+  //    polling loop. If false, execute the callback immediately and
+
+  //    synchronously but do NOT continue a callback return-true polling loop.
+
+  //    If omitted, cancel that id's doTimeout.
+
+  // 
+
+  // Returns:
+
+  // 
+
+  //  When creating a <jQuery.fn.doTimeout>, the initial jQuery collection of
+
+  //  elements is returned. Otherwise, if force_mode is true, false or undefined
+
+  //  and there is a yet-to-be-executed callback to cancel, true is returned,
+
+  //  but if no callback remains to be executed, undefined is returned.
+
+
+  $.fn[doTimeout] = function () {
+
+    var args = aps.call(arguments),
+        result = p_doTimeout.apply(this, [doTimeout + args[0]].concat(args));
+
+    return typeof args[0] === 'number' || typeof args[1] === 'number' ? this : result;
+  };
+
+  function p_doTimeout(jquery_data_key) {
+
+    var that = this,
+        elem,
+        data = {},
+
+
+    // Allows the plugin to call a string callback method.
+
+    method_base = jquery_data_key ? $.fn : $,
+
+
+    // Any additional arguments will be passed to the callback.
+
+    args = arguments,
+        slice_args = 4,
+        id = args[1],
+        delay = args[2],
+        callback = args[3];
+
+    if (typeof id !== 'string') {
+
+      slice_args--;
+
+      id = jquery_data_key = 0;
+
+      delay = args[1];
+
+      callback = args[2];
+    }
+
+    // If id is passed, store a data reference either as .data on the first
+
+    // element in a jQuery collection, or in the internal cache.
+
+    if (jquery_data_key) {
+      // Note: key is 'doTimeout' + id
+
+
+      // Get id-object from the first element's data, otherwise initialize it to {}.
+
+      elem = that.eq(0);
+
+      elem.data(jquery_data_key, data = elem.data(jquery_data_key) || {});
+    } else if (id) {
+
+      // Get id-object from the cache, otherwise initialize it to {}.
+
+      data = cache[id] || (cache[id] = {});
+    }
+
+    // Clear any existing timeout for this id.
+
+    data.id && clearTimeout(data.id);
+
+    delete data.id;
+
+    // Clean up when necessary.
+
+    function cleanup() {
+
+      if (jquery_data_key) {
+
+        elem.removeData(jquery_data_key);
+      } else if (id) {
+
+        delete cache[id];
+      }
+    };
+
+    // Yes, there actually is a setTimeout call in here!
+
+    function actually_setTimeout() {
+
+      data.id = setTimeout(function () {
+        data.fn();
+      }, delay);
+    };
+
+    if (callback) {
+
+      // A callback (and delay) were specified. Store the callback reference for
+
+      // possible later use, and then setTimeout.
+
+      data.fn = function (no_polling_loop) {
+
+        // If the callback value is a string, it is assumed to be the name of a
+
+        // method on $ or $.fn depending on where doTimeout was executed.
+
+        if (typeof callback === 'string') {
+
+          callback = method_base[callback];
+        }
+
+        callback.apply(that, aps.call(args, slice_args)) === true && !no_polling_loop
+
+        // Since the callback returned true, and we're not specifically
+
+        // canceling a polling loop, do it again!
+
+        ? actually_setTimeout()
+
+        // Otherwise, clean up and quit.
+
+        : cleanup();
+      };
+
+      // Set that timeout!
+
+      actually_setTimeout();
+    } else if (data.fn) {
+
+      // No callback passed. If force_mode (delay) is true, execute the data.fn
+
+      // callback immediately, continuing any callback return-true polling loop.
+
+      // If force_mode is false, execute the data.fn callback immediately but do
+
+      // NOT continue a callback return-true polling loop. If force_mode is
+
+      // undefined, simply clean up. Since data.fn was still defined, whatever
+
+      // was supposed to happen hadn't yet, so return true.
+
+      delay === undefined ? cleanup() : data.fn(delay === false);
+
+      return true;
+    } else {
+
+      // Since no callback was passed, and data.fn isn't defined, it looks like
+
+      // whatever was supposed to happen already did. Clean up and quit!
+
+      cleanup();
+    }
+  };
+})(jQuery);
+
+//CSS3 Animate-it
+
+$('.animatedParent').appear();
+
+$('.animatedClick').click(function () {
+
+  var target = $(this).attr('data-target');
+
+  if ($(this).attr('data-sequence') != undefined) {
+
+    var firstId = $("." + target + ":first").attr('data-id');
+
+    var lastId = $("." + target + ":last").attr('data-id');
+
+    var number = firstId;
+
+    //Add or remove the class
+
+    if ($("." + target + "[data-id=" + number + "]").hasClass('go')) {
+
+      $("." + target + "[data-id=" + number + "]").addClass('goAway');
+
+      $("." + target + "[data-id=" + number + "]").removeClass('go');
+    } else {
+
+      $("." + target + "[data-id=" + number + "]").addClass('go');
+
+      $("." + target + "[data-id=" + number + "]").removeClass('goAway');
+    }
+
+    number++;
+
+    delay = Number($(this).attr('data-sequence'));
+
+    $.doTimeout(delay, function () {
+
+      console.log(lastId);
+
+      //Add or remove the class
+
+      if ($("." + target + "[data-id=" + number + "]").hasClass('go')) {
+
+        $("." + target + "[data-id=" + number + "]").addClass('goAway');
+
+        $("." + target + "[data-id=" + number + "]").removeClass('go');
+      } else {
+
+        $("." + target + "[data-id=" + number + "]").addClass('go');
+
+        $("." + target + "[data-id=" + number + "]").removeClass('goAway');
+      }
+
+      //increment
+
+      ++number;
+
+      //continute looping till reached last ID
+
+      if (number <= lastId) {
+        return true;
+      }
+    });
+  } else {
+
+    if ($('.' + target).hasClass('go')) {
+
+      $('.' + target).addClass('goAway');
+
+      $('.' + target).removeClass('go');
+    } else {
+
+      $('.' + target).addClass('go');
+
+      $('.' + target).removeClass('goAway');
+    }
+  }
+});
+
+$(document.body).on('appear', '.animatedParent', function (e, $affected) {
+
+  var ele = $(this).find('.animated');
+
+  var parent = $(this);
+
+  if (parent.attr('data-sequence') != undefined) {
+
+    var firstId = $(this).find('.animated:first').attr('data-id');
+
+    var number = firstId;
+
+    var lastId = $(this).find('.animated:last').attr('data-id');
+
+    $(parent).find(".animated[data-id=" + number + "]").addClass('go');
+
+    number++;
+
+    delay = Number(parent.attr('data-sequence'));
+
+    $.doTimeout(delay, function () {
+
+      $(parent).find(".animated[data-id=" + number + "]").addClass('go');
+
+      ++number;
+
+      if (number <= lastId) {
+        return true;
+      }
+    });
+  } else {
+
+    ele.addClass('go');
+  }
+});
+
+$(document.body).on('disappear', '.animatedParent', function (e, $affected) {
+
+  if (!$(this).hasClass('animateOnce')) {
+
+    $(this).find('.animated').removeClass('go');
+  }
+});
+
+$(window).on('load', function () {
+
+  $.force_appear();
+});
+
+/**
+ * jquery.detectSwipe v2.1.3
+ * jQuery Plugin to obtain touch gestures from iPhone, iPod Touch, iPad and Android
+ * http://github.com/marcandre/detect_swipe
+ * Based on touchwipe by Andreas Waltl, netCU Internetagentur (http://www.netcu.de)
+ */
+
+(function (factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(['jquery'], factory);
+  } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object') {
+    // Node/CommonJS
+    module.exports = factory(require('jquery'));
+  } else {
+    // Browser globals
+    factory(jQuery);
+  }
+})(function ($) {
+
+  $.detectSwipe = {
+    version: '2.1.2',
+    enabled: 'ontouchstart' in document.documentElement,
+    preventDefault: true,
+    threshold: 20
+  };
+
+  var startX,
+      startY,
+      isMoving = false;
+
+  function onTouchEnd() {
+    this.removeEventListener('touchmove', onTouchMove);
+    this.removeEventListener('touchend', onTouchEnd);
+    isMoving = false;
+  }
+
+  function onTouchMove(e) {
+    if ($.detectSwipe.preventDefault) {
+      e.preventDefault();
+    }
+    if (isMoving) {
+      var x = e.touches[0].pageX;
+      var y = e.touches[0].pageY;
+      var dx = startX - x;
+      var dy = startY - y;
+      var dir;
+      var ratio = window.devicePixelRatio || 1;
+      if (Math.abs(dx) * ratio >= $.detectSwipe.threshold) {
+        dir = dx > 0 ? 'left' : 'right';
+      } else if (Math.abs(dy) * ratio >= $.detectSwipe.threshold) {
+        dir = dy > 0 ? 'up' : 'down';
+      }
+      if (dir) {
+        onTouchEnd.call(this);
+        $(this).trigger('swipe', dir).trigger('swipe' + dir);
+      }
+    }
+  }
+
+  function onTouchStart(e) {
+    if (e.touches.length == 1) {
+      startX = e.touches[0].pageX;
+      startY = e.touches[0].pageY;
+      isMoving = true;
+      this.addEventListener('touchmove', onTouchMove, false);
+      this.addEventListener('touchend', onTouchEnd, false);
+    }
+  }
+
+  function setup() {
+    this.addEventListener && this.addEventListener('touchstart', onTouchStart, false);
+  }
+
+  function teardown() {
+    this.removeEventListener('touchstart', onTouchStart);
+  }
+
+  $.event.special.swipe = { setup: setup };
+
+  $.each(['left', 'up', 'down', 'right'], function () {
+    $.event.special['swipe' + this] = { setup: function setup() {
+        $(this).on('swipe', $.noop);
+      } };
   });
 });
 
@@ -2885,12 +3802,45 @@ $(document).ready(function () {
 
   $(document).on('click', '.anchorJS', scrollNav);
 
-  function scrollNav() {
+  function scrollNav(e) {
+    e.preventDefault();
     $('html, body').animate({
       scrollTop: $($(this).data('href')).offset().top - 40
     }, 1000);
     return false;
   }
+
+  $('.wrapper-bg').on('click', function (e) {
+    var _self = $(this),
+        togglesHidden = $('.topline__right'),
+        contentOut = $('.content-out');
+    if (!$(e.target).closest($('.topline')).length) {
+      _self.fadeToggle();
+      _self.closest(contentOut).find(togglesHidden).toggleClass('open');
+      _self.closest(contentOut).find('.navbar-responsive__btn').removeClass('active');
+      _self.closest('body').toggleClass('no-scroll');
+    }
+  });
+
+  $('.anchorJS').on('click', function (e) {
+    var _self = $(this),
+        togglesHidden = $('.topline__right'),
+        contentOut = $('.content-out'),
+        wrapperBg = $('.wrapper-bg');
+    _self.closest(contentOut).find(togglesHidden).removeClass('open');
+    _self.closest(contentOut).find('.navbar-responsive__btn').removeClass('active');
+    _self.closest('.content-out').find(wrapperBg).fadeOut();
+    _self.closest('body').removeClass('no-scroll');
+  });
+
+  $(".js-nav-swipe").on('swiperight', function () {
+    var _self = $(this),
+        wrapperBg = $('.wrapper-bg');
+    _self.removeClass('open');
+    _self.closest('.topline').find('.navbar-responsive__btn').removeClass('active');
+    _self.closest('.content-out').find(wrapperBg).fadeToggle();
+    _self.closest('body').toggleClass('no-scroll');
+  });
 
   function navbarResponsive() {
     var toggles = $('.navbar-responsive__btn'),
@@ -2901,6 +3851,7 @@ $(document).ready(function () {
       $(this).toggleClass('active');
       $(this).closest('.topline').find(togglesHidden).toggleClass('open');
       $(this).closest('.content-out').find(wrapperBg).fadeToggle();
+      $(this).closest('body').toggleClass('no-scroll');
     });
     toggles.mouseup(function () {
       return false;
@@ -2939,6 +3890,7 @@ $(document).ready(function () {
         window.location.hash = hash;
         $(document).on("scroll", onScroll);
       });
+<<<<<<< HEAD
     });
   });
 
@@ -2953,6 +3905,62 @@ $(document).ready(function () {
     _this.closest(authorCourseDescr).find(authorCourseHidden).slideToggle();
   });
   /* End author-courses */
+=======
+    });
+  });
+
+  /* End active menu */
+  var authorCourseTop = $('.author-course__top'),
+      authorCourseDescr = $('.author-course__descr'),
+      authorCourseHidden = $('.author-course__hidden');
+
+  authorCourseTop.on("click", function () {
+    var _this = $(this);
+    _this.toggleClass('open');
+    _this.closest(authorCourseDescr).find(authorCourseHidden).slideToggle();
+  });
+  /* End author-courses */
+
+  /* question-drop */
+  $(function () {
+    var sidebarDrop = $('.question-drop__descr'),
+        sidebarmenuItem = $('.question-drop__block'),
+        sidebarmenuLink = $('.question-drop__title');
+
+    sidebarmenuLink.on("click", function () {
+      sidebarmenuItem.removeClass('active');
+      $(this).closest(sidebarmenuItem).addClass('active');
+      var checkElement = $(this).next();
+      if (checkElement.is(sidebarDrop) && checkElement.is(':visible')) {
+        $(this).closest(sidebarmenuItem).removeClass('active');
+        checkElement.slideUp('normal');
+      }
+      if (checkElement.is(sidebarDrop) && !checkElement.is(':visible')) {
+        $('.question-drop .question-drop__descr:visible').slideUp('normal');
+        checkElement.slideDown('normal');
+      }
+      // if($(this).closest('li').find('ul').children().length == 0) {
+      //   return true;
+      // } else {
+      //   return false;
+      // }
+    });
+  });
+
+  /* end question-drop */
+
+  function inputChangLevel() {
+    var inputChange = $('.js-question-checkbox__input');
+
+    inputChange.on('change', function () {
+      var _this = $(this);
+
+      var questionText = _this.closest($('.question-checkbox__label')).find('.question-checkbox__text').text();
+      _this.closest($('.question-drop__block')).find($('.question__gap')).text(questionText);
+    });
+  };
+  inputChangLevel();
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 });
 
 $(window).on('load', function () {

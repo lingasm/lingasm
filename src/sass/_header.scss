@@ -44,7 +44,7 @@
       right: 0;
       padding-bottom: 25px;
       background-color: #fff;
-      transform: translate(-100%,0);
+      transform: translate(100%,0);
       transition: all .3s;
       z-index: 9999;
     }
@@ -54,10 +54,16 @@
   }
   &__btn {
     display: flex;
+    @media screen and (max-width: 550px) {
+      flex-direction: column;
+    }
     &-inner {
       display: flex;
       &.first {
         margin-right: 15px;
+        @media screen and (max-width: 550px) {
+          margin: 0 0 15px 0;
+        }
       }
     }
   }
@@ -212,7 +218,66 @@
 }
 
 .map {
+<<<<<<< HEAD
   width: 100%;
+=======
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+  }
+  &__block {
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 1200px) {
+      max-height: 50vh;
+    }
+    &.left {
+      @media screen and (max-width: 1400px) {
+        // margin-right: -40px;
+      }
+    }
+  }
+  &__itm1 {
+    width: 459px;
+    @media screen and (max-width: 1400px) {
+      width: 413px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 350px;
+    }
+  }
+  &__itm2 {
+    width: 342px;
+    @media screen and (max-width: 1400px) {
+      width: 308px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 261px;
+    }
+  }
+  &__itm3 {
+    width: 274px;
+    @media screen and (max-width: 1400px) {
+      width: 245px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 208px;
+      width: 40%;
+    }
+  }
+  &__itm4 {
+    width: 271px;
+    @media screen and (max-width: 1400px) {
+      width: 245px;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 208px;
+      width: 40%;
+    }
+  }
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea
 }
 
 /* Animate scroll-down*/
@@ -400,3 +465,49 @@ $animDuration: 5s;
   90% { color: $colorOutline; }
 }
 /* end scroll-down */
+<<<<<<< HEAD
+=======
+
+.map-svg {
+  // transition: fill .4s ease;
+}
+
+.line-drawing {
+  path {
+    fill: transparent;
+    // stroke: none;
+  }
+  .circle-show {
+    transition: all .8s ease;
+    &.top {
+      animation: circleShowTop 1.5s linear 1;
+      animation-timing-function: ease-in;
+    }
+  }
+  &.show {
+    path {
+      transition: fill .4s ease;
+      fill: #fff;
+    }
+    .circle-show {
+
+    }
+    .path-show {
+      transition: fill .4s ease;
+      stroke: none;
+    }
+  }
+  .path-dasharray {
+    stroke-dasharray: 1,3!important;
+    stroke: #646464!important;
+    stroke-width: 2!important;
+  }
+
+}
+
+@keyframes circleShowTop {
+  0% {  opacity: 0; transform: scale(.3); }
+  100% {  opacity: 1!important; transform: scale(1); }
+}
+
+>>>>>>> bf6afa94a93899d9c91306fa39e0682b1bc57fea

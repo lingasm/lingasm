@@ -10,27 +10,6 @@
   }
 }
 
-@mixin heading ($color: $color-green){
-  color: $color;
-  font-size: 40px;
-  font-family: "SketchBlockBold";
-  text-transform: uppercase;
-  @media screen and (max-width: 960px) {
-    font-size: 30px;
-  }
-  @media screen and (max-width: 768px) {
-    font-size: 25px;
-  }
-}
-
-@mixin ruler ($url, $width: 95%) {
-  background: image-url($url);
-  background-repeat: no-repeat;
-  width: $width;
-  height: 3px;
-  margin: 5px auto;
-}
-
 @mixin css-lock($min-size: 1, $max-size: 1.4, $min-width: 20, $max-width: 100, $property: font-size, $unit: px) {
   #{$property}: #{$max-size}#{$unit};
   #{$property}: calc(#{$min-size}#{$unit} + (#{$max-size} - #{$min-size}) * ((100vw - #{$min-width}#{$unit}) / (#{$max-width} - #{$min-width})));
